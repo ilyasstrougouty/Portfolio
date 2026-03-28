@@ -1,9 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
+const Groq = require('groq-sdk');
 require('dotenv').config();
 
 const app = express();
+app.use(express.json()); // Essential for parsing the POST JSON payload from the chatbot
+
 app.use(cors());
 app.use(express.static(__dirname)); // Serve static files (index.html, etc.)
 
@@ -111,6 +114,58 @@ app.get('/api/github-stats/:username', async (req, res) => {
   } catch (error) {
     console.error('[BACKEND] Error fetching GitHub data:', error.message);
     res.status(500).json({ error: 'Failed to fetch GitHub data' });
+  }
+});
+
+// ==========================================
+// AI CHATBOT STREAMING ENDPOINT (Groq)
+// ==========================================
+const SYSTEM_PROMPT = `You are a professional AI assistant built into Ben's portfolio website. Your purpose is to answer questions about Ben's background, skills, and experience. Ben is a Full-Stack Developer and AI Engineer. He specializes in Python for backend development and AI/ML components (specifically using FastAPI). For frontend and mobile development, he utilizes React Native and Expo. He is highly capable with data, using SQL, Data Analysis, and tools like ChromaDB for building RAG pipelines. He also programs in C, Java, and JavaScript/TypeScript. Keep your responses concise, helpful, and highly relevant to this professional scope.`;
+
+app.post('/api/chat', async (req, res) => {
+  const { messages } = req.body;
+
+  if (!messages || !Array.isArray(messages)) {
+    return res.status(400).json({ error: 'Messages array is required' });
+  }
+
+  // Prepend the strict identity system prompt
+  const apiMessages = [
+    { role: "system", content: SYSTEM_PROMPT },
+    ...messages
+  ];
+
+  try {
+    // Check if the developer provided the key
+    if (!process.env.GROQ_API_KEY) {
+        res.write("AI Offline: Missing GROQ_API_KEY in server environment.");
+        return res.end();
+    }
+
+    const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+    // Inform the client that we are sending a raw chunked stream
+    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Transfer-Encoding', 'chunked');
+
+    const stream = await groq.chat.completions.create({
+      messages: apiMessages,
+      model: "llama-3.1-8b-instant",
+      stream: true,
+    });
+
+    for await (const chunk of stream) {
+      const content = chunk.choices[0]?.delta?.content || '';
+      if (content) {
+        res.write(content);
+      }
+    }
+
+    res.end();
+  } catch (error) {
+    console.error('[BACKEND] Chatbot Streaming Error:', error.message);
+    res.write("\n\n[System Error: Failed to connect to inference server.]");
+    res.end();
   }
 });
 
