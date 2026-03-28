@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Fetch GitHub Data
             fetchGitHubStats('ilyasstrougouty');
             fetchRepoStats('tikkocampus', 'tikko');
-            fetchRepoStats('lets-stutter', 'stutter');
         }, 900);
     };
 
@@ -420,8 +419,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     navLinks.forEach(link => {
                         const href = link.getAttribute('href').substring(1);
                         if (href === id) {
-                            link.classList.add('text-white', 'border-white/40', 'font-semibold', 'scale-105');
-                            link.classList.remove('text-zinc-500', 'border-transparent');
+                            link.classList.add('text-white', 'border-white/40');
+                            link.classList.remove('text-zinc-500', 'border-transparent', 'font-semibold', 'scale-105');
                         } else {
                             link.classList.remove('text-white', 'border-white/40', 'font-semibold', 'scale-105');
                             link.classList.add('text-zinc-500', 'border-transparent');
