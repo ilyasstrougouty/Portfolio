@@ -1,0 +1,305 @@
+/* 
+   ARCHITECT.OS | Portfolio Logic
+   Handles: Splash Animation, Content Reveal, and GitHub Data Fetching
+*/
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Always start from the top on load/refresh
+    window.scrollTo(0, 0);
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    // 1. Language Sequence Handler
+    const greetings = [
+        "Hello",
+        "مرحبا", 
+        "Bonjour", 
+        "Привет", 
+        "你好",
+        "नमस्ते",
+        "ⴰⵣⵓⵍ"
+    ];
+    
+    const greetingEl = document.getElementById('greeting');
+    const splashScreen = document.getElementById('splash-screen');
+    const mainContent = document.getElementById('main-content');
+    
+    let currentGreeting = 0;
+    
+    // Timing curve: "Hello" lingers, then accelerates
+    const getDisplayDuration = (index) => {
+        if (index === 0) return 1000;
+        if (index === 1) return 350;
+        return Math.max(120, Math.round(300 * Math.pow(0.55, index - 2)));
+    };
+    
+    // Fade speed also accelerates
+    const getFadeDuration = (index) => {
+        if (index === 0) return 250;
+        return Math.max(60, Math.round(200 * Math.pow(0.55, index - 1)));
+    };
+    
+    const cycleGreetings = () => {
+        if (currentGreeting < greetings.length) {
+            // First greeting ("Hello") has a special fade animation
+            if (currentGreeting === 0) {
+                greetingEl.style.transition = `opacity 250ms ease, transform 250ms ease`;
+                greetingEl.textContent = '• ' + greetings[currentGreeting];
+                requestAnimationFrame(() => {
+                    greetingEl.style.opacity = '1';
+                    greetingEl.style.transform = 'scale(1) translateY(0)';
+                });
+                
+                setTimeout(() => {
+                    // Instant swap to next greeting (eliminating the fade-out animation)
+                    currentGreeting++;
+                    cycleGreetings();
+                }, 1000);
+            } else {
+                // Subsequent greetings show "normally" (instantly)
+                greetingEl.style.transition = 'none';
+                greetingEl.style.transform = 'none';
+                greetingEl.style.filter = 'none';
+                
+                // Refined "speed" style: full opacity for consistent color
+                greetingEl.style.opacity = '1';
+                greetingEl.style.letterSpacing = 'normal';
+                
+                greetingEl.textContent = '• ' + greetings[currentGreeting];
+                
+                // Exponential acceleration curve for the "compound movement" feel
+                const baseDelay = 400;
+                const accelerationFactor = 0.6;
+                const currentDelay = Math.max(40, Math.round(baseDelay * Math.pow(accelerationFactor, currentGreeting - 1)));
+                
+                setTimeout(() => {
+                    currentGreeting++;
+                    if (currentGreeting < greetings.length) {
+                        cycleGreetings();
+                    } else {
+                        fadeOutSplash();
+                    }
+                }, currentDelay); 
+            }
+        }
+    };
+    
+    const fadeOutSplash = () => {
+        // Curtain slide-up reveal (like the reference site)
+        splashScreen.style.transition = 'transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
+        splashScreen.style.transform = 'translateY(-100%)';
+        splashScreen.style.pointerEvents = 'none';
+        
+        // Show main content underneath immediately
+        mainContent.classList.remove('invisible');
+        mainContent.classList.add('opacity-100');
+        
+        setTimeout(() => {
+            splashScreen.remove();
+            document.body.classList.remove('overflow-hidden');
+            
+            // Trigger Reveal Animations
+            triggerReveals();
+            
+            // Generate Map Path now that content is visible
+            setTimeout(generateMapPath, 100);
+            
+            // Fetch GitHub Data
+            fetchGitHubStats('ilyasstrougouty');
+        }, 900);
+    };
+
+    // 2. Fetch GitHub Statistics from our Backend
+    const fetchGitHubStats = async (username) => {
+        const contributionGridEl = document.getElementById('contribution-grid');
+        const totalCommitsEl = document.getElementById('total-contributions');
+        
+        try {
+            const response = await fetch(`http://localhost:3001/api/github-stats/${username}`);
+            const data = await response.json();
+            
+            if (data.error) throw new Error(data.error);
+
+            // Update Stats
+            if (totalCommitsEl) totalCommitsEl.textContent = data.totalContributions || 0;
+
+            // Render Contribution Grid (Exact GitHub Style)
+            if (contributionGridEl && data.weeks) {
+                renderContributionGrid(data.weeks);
+            }
+
+        } catch (error) {
+            console.error('Fetch error:', error);
+            if (totalCommitsEl) totalCommitsEl.textContent = '!';
+        }
+    };
+
+    /**
+     * Renders the GitHub Contribution Grid (HTML/CSS dynamically generated)
+     */
+    const renderContributionGrid = (weeks) => {
+        const grid = document.getElementById('contribution-grid');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        // GitHub empty square color
+        const EMPTY_COLOR = '#161b22';
+
+        weeks.forEach((week) => {
+            const weekCol = document.createElement('div');
+            weekCol.className = 'flex flex-col gap-[3px] flex-shrink-0';
+            
+            week.contributionDays.forEach((day) => {
+                const daySquare = document.createElement('div');
+                daySquare.className = 'w-[10px] h-[10px] rounded-[2px] transition-all duration-300 hover:scale-125 hover:z-10 cursor-pointer flex-shrink-0';
+                
+                // If count is 0, use our custom dark color, otherwise use GitHub's returned color
+                daySquare.style.backgroundColor = day.contributionCount > 0 ? day.color : EMPTY_COLOR;
+                
+                // Add tooltip-like info
+                daySquare.title = `${day.contributionCount} contributions on ${day.date}`;
+                
+                weekCol.appendChild(daySquare);
+            });
+            
+            grid.appendChild(weekCol);
+        });
+    };
+
+    // 3. Reveal on Scroll Observer
+    const triggerReveals = () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal, .reveal-delay').forEach(el => observer.observe(el));
+    };
+
+    // 4. Map Path Drawing Logic
+    const generateMapPath = () => {
+        // Get all sections
+        const sections = Array.from(document.querySelectorAll('main section'));
+        if (sections.length < 2) return;
+
+        const maskPath = document.getElementById('mask-path');
+        const drawPath = document.getElementById('draw-path');
+        if (!maskPath || !drawPath) return;
+
+        const points = [];
+        let isLeft = true;
+
+        sections.forEach((section, index) => {
+            let y = section.offsetTop + (section.offsetHeight / 2);
+            let x = 0;
+
+            if (index === 0) {
+                // Hero section: Start near the left side
+                x = window.innerWidth * 0.2;
+                isLeft = false;
+            } else if (index === sections.length - 1) {
+                // Last section (Contact): Point directly to the "Let's Talk" button
+                const btn = section.querySelector('a[href^="mailto"]');
+                if (btn) {
+                    // btn is inside relative DOM, to get absolute offset relative to <main>
+                    // we can use getBoundingClientRect + scrollY
+                    const mainRect = document.querySelector('main').getBoundingClientRect();
+                    const btnRect = btn.getBoundingClientRect();
+                    
+                    x = btnRect.left + (btnRect.width / 2) - mainRect.left;
+                    y = btnRect.top + (btnRect.height / 2) - mainRect.top;
+                    
+                    // We slightly offset Y up to avoid pointing deep inside the button visually
+                    y -= 10;
+                } else {
+                    x = window.innerWidth / 2;
+                }
+            } else {
+                // Alternating
+                x = isLeft ? window.innerWidth * 0.2 : window.innerWidth * 0.8;
+                isLeft = !isLeft;
+            }
+
+            points.push({ x, y });
+        });
+
+        // Create SVG Path string with Cubic Beziers for organic curves
+        let d = `M ${points[0].x} ${points[0].y}`;
+        for (let i = 1; i < points.length; i++) {
+            const prev = points[i - 1];
+            const curr = points[i];
+            
+            const cp1x = prev.x;
+            const cp1y = prev.y + (curr.y - prev.y) / 2;
+            const cp2x = curr.x;
+            const cp2y = prev.y + (curr.y - prev.y) / 2;
+
+            d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${curr.x} ${curr.y}`;
+        }
+
+        maskPath.setAttribute('d', d);
+        drawPath.setAttribute('d', d);
+
+        // Prep mask for scroll-drawing
+        const length = maskPath.getTotalLength();
+        maskPath.style.strokeDasharray = length;
+        maskPath.style.strokeDashoffset = length;
+        
+        animatePathOnScroll();
+    };
+
+    const animatePathOnScroll = () => {
+        const maskPath = document.getElementById('mask-path');
+        if (!maskPath) return;
+
+        const length = maskPath.getTotalLength();
+        if (length === 0) return;
+
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        
+        const maxScroll = Math.max(1, documentHeight - windowHeight);
+        const scrollFraction = Math.max(0, Math.min(1, scrollY / maxScroll));
+
+        // When at the very top, draw down to 50% of the viewport.
+        // As we scroll to the bottom, smoothly interpolate from that to 100% of the path length.
+        const startPercent = (windowHeight * 0.5) / documentHeight;
+        const visiblePercent = startPercent + scrollFraction * (1 - startPercent);
+
+        const drawLength = length * visiblePercent;
+        maskPath.style.strokeDashoffset = (length - drawLength).toString();
+    };
+
+    // Hook listeners
+    window.addEventListener('resize', () => {
+        requestAnimationFrame(generateMapPath);
+    });
+    window.addEventListener('scroll', () => {
+        requestAnimationFrame(animatePathOnScroll);
+    });
+
+    // Initialize - Delay slightly to ensure smooth first frame
+    setTimeout(cycleGreetings, 300);
+});
+
+// Certifications toggle (global so inline onclick works)
+function toggleCerts() {
+    const extra = document.getElementById('extra-certs');
+    const btn = document.getElementById('certs-toggle');
+    const isHidden = extra.classList.contains('hidden');
+
+    if (isHidden) {
+        extra.classList.remove('hidden');
+        extra.classList.add('flex');
+        btn.textContent = '− Show Less';
+    } else {
+        extra.classList.add('hidden');
+        extra.classList.remove('flex');
+        btn.textContent = '+ 2 More';
+    }
+}

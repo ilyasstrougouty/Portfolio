@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html class="dark overflow-x-hidden" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>ARCHITECT.OS | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary overflow-x-hidden">
+
+    <!-- Splash Screen (Intro Animation) -->
+    <div id="splash-screen" class="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden">
+        <h1 id="greeting" class="text-[#A27DFF] text-4xl md:text-5xl font-headline font-normal tracking-normal" style="opacity: 0;">
+            • Hello
+        </h1>
+    </div>
+
+    <!-- Main Content (Hidden Initially) -->
+    <main id="main-content" class="relative invisible opacity-0 transition-opacity duration-1000">
+        <!-- Top Navigation -->
+        <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex justify-between items-center px-6 md:px-8 py-3 bg-zinc-950/80 backdrop-blur-xl rounded-full w-[94%] max-w-5xl shadow-[0_40px_40px_-10px_rgba(0,0,0,0.08)]">
+            <div class="text-xs md:text-xl font-thin tracking-widest text-white shrink-0">ARCHITECT.OS</div>
+            <div class="hidden md:flex items-center gap-6 lg:gap-8 font-inter tracking-tight font-light transition-all">
+                <a class="text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Projects</a>
+                <a class="text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Stack</a>
+                <a class="text-white font-medium border-b border-white/40 pb-1" href="#">Experience</a>
+                <a class="text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Contact</a>
+            </div>
+            <button class="bg-primary text-on-primary px-4 md:px-6 py-1.5 md:py-2 rounded-full font-label text-[10px] md:text-sm font-medium hover:scale-105 transition-transform duration-300 shrink-0">Resume</button>
+        </nav>
+
+
+
+
+        <!-- Hero Section -->
+        <section class="min-h-screen bg-white bg-grid-black text-black flex items-center px-6 md:px-24 py-20 md:py-32 overflow-hidden">
+            <div class="max-w-7xl w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
+                <h2 class="text-4xl md:text-[8rem] xl:text-[10rem] font-headline font-thin leading-none tracking-tighter text-left reveal">
+                    Hi, I'm Ben.
+                </h2>
+                <div class="flex flex-col gap-10 lg:pt-20 reveal-delay">
+                    <p class="text-2xl md:text-3xl text-zinc-600 font-light leading-relaxed max-w-xl">
+                        A full-stack architect specializing in GitHub-driven performance and digital precision. Bridging intuition and machine logic.
+                    </p>
+                    <button class="bg-black text-white w-fit px-10 py-5 rounded-full flex items-center gap-4 text-xl font-medium transition-transform hover:scale-105 active:scale-95 group">
+                        Get in Touch
+                        <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="bg-[#09090b] bg-grid-white py-32 px-6 md:px-24">
+            <div class="max-w-5xl mx-auto relative z-10">
+                <div class="flex flex-col gap-4 mb-20">
+                    <span class="font-label text-sm text-primary/40 uppercase tracking-[0.3em]">Knowledge Base</span>
+                    <h3 class="text-5xl font-headline font-thin text-white">Academic Trajectory</h3>
+                </div>
+                <div class="relative pl-12 md:pl-24">
+                    <div class="absolute left-[23px] md:left-[47px] top-0 bottom-0 w-px bg-outline-variant/30"></div>
+                    <!-- Item 1 -->
+                    <div class="relative mb-24 last:mb-0 reveal">
+                        <div class="absolute -left-[54px] md:-left-[78px] top-0 w-12 h-12 bg-white rounded-full flex items-center justify-center z-10">
+                            <img class="w-8 h-8 rounded-full grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnskPsBnOeg-Hhy1L1omT6FxcsXazk1bhhQALC8uDY7kbBPvoZ2Mg33qK4_whduT5VbyL7keokNG_bYmx53To_x4gtBh4cCRfFEXawf_gSDAw7DZBJZBkiK1nxq2N90K3hxPUMopYvDBOu36CN_LqGShKQIXvhwYX7m1zs-8i-1oSLiQIMOL7MW5FYT0vUpZHtyDT2Rgk2VYZlfeMpg5-0p8lQ3acftenE4a8OXPM9RfWfneDKFWTimzNge2WpPeeFykuyOSskOdk"/>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div>
+                                <h4 class="text-2xl font-semibold text-white mb-2">MSc in Artificial Intelligence</h4>
+                                <p class="text-zinc-500 font-label tracking-wide uppercase text-sm">Stanford University • 2021 — 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="relative mb-24 last:mb-0 reveal">
+                        <div class="absolute -left-[54px] md:-left-[78px] top-0 w-12 h-12 bg-white rounded-full flex items-center justify-center z-10">
+                            <img class="w-8 h-8 rounded-full grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC64bLjxZvr_L_dGE2PtZHfF-JYpDHtyZRf0m_CLtfXhoixleTO1H-4R6XTX32Rul_70edtAlD1NhejBK9h4qSvVsUXcAhYqazjmGig-ZqsufM_hCAU-xoPy9i64SMmrjTYG3yXZem3KdPQbb62A1F0urt_GsOyDzIeiyc4ywIc1cNQPr0Kt5N-5JqWFnZCYrhl9qGf27XJBZNVJXiU6cir-8MYzj44PsZyUFuj7f84zLDZDcFUtJjfAljlMTc3MdCRG0fbokfunR4"/>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div>
+                                <h4 class="text-2xl font-semibold text-white mb-2">BSc in Software Engineering</h4>
+                                <p class="text-zinc-500 font-label tracking-wide uppercase text-sm">MIT • 2017 — 2021</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="bg-surface bg-grid-white py-32 px-6 md:px-24">
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="flex flex-col gap-4 mb-16">
+                    <span class="font-label text-sm text-primary/40 uppercase tracking-[0.3em]">System Modules</span>
+                    <h3 class="text-4xl font-headline font-thin text-white tracking-tight">Skills &amp; Stack</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Backend Card -->
+                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-green-400 font-mono text-sm">$</span>
+                            <h4 class="text-lg font-semibold text-white font-label">Backend Engineering</h4>
+                        </div>
+                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">Building scalable, reliable, and secure server-side systems. Performance-first architecture.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">python</span>
+                            <span class="skill-tag">node.js</span>
+                            <span class="skill-tag">express</span>
+                            <span class="skill-tag">postgresql</span>
+                            <span class="skill-tag">redis</span>
+                            <span class="skill-tag">graphql</span>
+                            <span class="skill-tag">docker</span>
+                        </div>
+                    </div>
+
+                    <!-- Frontend Card -->
+                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-cyan-400 font-mono text-sm">~</span>
+                            <h4 class="text-lg font-semibold text-white font-label">Frontend &amp; Design</h4>
+                        </div>
+                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">Crafting polished interfaces with smooth animations and pixel-perfect attention to detail.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">react</span>
+                            <span class="skill-tag">next.js</span>
+                            <span class="skill-tag">typescript</span>
+                            <span class="skill-tag">tailwindcss</span>
+                            <span class="skill-tag">figma</span>
+                            <span class="skill-tag">framer-motion</span>
+                        </div>
+                    </div>
+
+                    <!-- Cloud & DevOps Card -->
+                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-yellow-400 font-mono text-sm">#</span>
+                            <h4 class="text-lg font-semibold text-white font-label">Cloud &amp; DevOps</h4>
+                        </div>
+                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">Deploying and managing production systems across major cloud providers with CI/CD pipelines.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">aws</span>
+                            <span class="skill-tag">gcp</span>
+                            <span class="skill-tag">vercel</span>
+                            <span class="skill-tag">kubernetes</span>
+                            <span class="skill-tag">terraform</span>
+                            <span class="skill-tag">github-actions</span>
+                        </div>
+                    </div>
+
+                    <!-- AI & Data Card -->
+                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-purple-400 font-mono text-sm">&gt;</span>
+                            <h4 class="text-lg font-semibold text-white font-label">AI &amp; Machine Learning</h4>
+                        </div>
+                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">Designing and training models, building intelligent pipelines, and integrating LLMs into products.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">pytorch</span>
+                            <span class="skill-tag">tensorflow</span>
+                            <span class="skill-tag">langchain</span>
+                            <span class="skill-tag">openai</span>
+                            <span class="skill-tag">huggingface</span>
+                            <span class="skill-tag">pandas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section class="bg-surface-container-lowest bg-grid-white py-32 px-6 md:px-24">
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="flex justify-between items-end mb-16">
+                    <div class="flex flex-col gap-4">
+                        <span class="font-label text-sm text-primary/40 uppercase tracking-[0.3em]">~/projects</span>
+                        <h3 class="text-4xl font-headline font-thin text-white tracking-tight">Featured Projects</h3>
+                    </div>
+                    <a class="text-zinc-500 hover:text-white flex items-center gap-2 transition-colors font-label text-sm" href="#">View all <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card border border-white/10 rounded-xl overflow-hidden bg-surface-container-low/40 hover:border-white/20 transition-all duration-300 reveal group">
+                        <!-- Terminal Header -->
+                        <div class="flex items-center justify-between px-5 py-3 border-b border-white/5 bg-surface-container-high/50">
+                            <div class="flex gap-2">
+                                <div class="w-2.5 h-2.5 rounded-full bg-red-500/70"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
+                            </div>
+                            <span class="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">ben/neural-engine</span>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="p-8">
+                            <h4 class="text-xl font-semibold text-white mb-2 font-label group-hover:text-zinc-200 transition-colors">Neural Engine</h4>
+                            <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">A high-performance inference engine for running transformer models locally. Supports ONNX, TensorRT, and custom quantization schemes.</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="skill-tag">rust</span>
+                                <span class="skill-tag">cuda</span>
+                                <span class="skill-tag">onnx</span>
+                                <span class="skill-tag">wasm</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-zinc-600 font-mono text-xs">
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span> 342</span>
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call_split</span> 48</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-card border border-white/10 rounded-xl overflow-hidden bg-surface-container-low/40 hover:border-white/20 transition-all duration-300 reveal group">
+                        <div class="flex items-center justify-between px-5 py-3 border-b border-white/5 bg-surface-container-high/50">
+                            <div class="flex gap-2">
+                                <div class="w-2.5 h-2.5 rounded-full bg-red-500/70"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
+                            </div>
+                            <span class="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">ben/architect-cli</span>
+                        </div>
+                        <div class="p-8">
+                            <h4 class="text-xl font-semibold text-white mb-2 font-label group-hover:text-zinc-200 transition-colors">Architect CLI</h4>
+                            <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">A zero-config scaffolding tool for full-stack apps. Generates project structure, CI/CD pipelines, and deployment configs in seconds.</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="skill-tag">typescript</span>
+                                <span class="skill-tag">node.js</span>
+                                <span class="skill-tag">cli</span>
+                                <span class="skill-tag">devtools</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-zinc-600 font-mono text-xs">
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span> 187</span>
+                                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call_split</span> 23</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Show More Link -->
+                <div class="flex justify-center mt-12">
+                    <a href="https://github.com/ilyasstrougouty" target="_blank" class="text-zinc-500 hover:text-white flex items-center gap-2 transition-all duration-300 font-mono text-sm group">
+                        Show more
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Section -->
+        <section class="bg-[#09090b] bg-grid-white py-20 md:py-32 px-6 md:px-24 overflow-x-hidden">
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="flex flex-col gap-10 md:gap-12">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                        <div class="flex flex-col gap-3 md:gap-4">
+                             <span class="font-label text-[10px] md:text-sm text-primary/40 uppercase tracking-[0.3em]">Contribution Records</span>
+                             <h3 class="text-3xl md:text-5xl font-headline font-thin text-white tracking-tight">Public Contributions</h3>
+                        </div>
+                        <a class="text-zinc-500 hover:text-white flex items-center gap-2 transition-colors font-label text-[10px] md:text-sm" href="https://github.com/ilyasstrougouty" target="_blank">View profile <span class="material-symbols-outlined text-sm">open_in_new</span></a>
+                    </div>
+
+                    <!-- Exact GitHub Dark Grid (Responsive & Centered) -->
+                    <div class="flex flex-col items-center w-full">
+                        <div class="w-full max-w-4xl bg-[#0d1117]/50 border border-white/5 rounded-2xl p-6 md:p-10 pb-10 md:pb-12 overflow-x-auto no-scrollbar">
+                            <div class="flex gap-4 min-w-fit">
+                                <!-- Day Labels -->
+                                <div class="flex flex-col justify-between py-8 pt-12 pr-2 font-mono text-[9px] text-zinc-600 uppercase tracking-tighter">
+                                    <span>Mon</span>
+                                    <span>Wed</span>
+                                    <span>Fri</span>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <!-- Month Labels (Dynamic) -->
+                                    <div id="month-labels" class="flex justify-between mb-4 px-2 font-mono text-[9px] text-zinc-600 uppercase tracking-[0.2em]">
+                                        <!-- Will be populated by JS -->
+                                    </div>
+                                    
+                                    <!-- The Grid -->
+                                    <div id="contribution-grid" class="flex gap-[3px] overflow-hidden">
+                                        <!-- Will be populated by JS -->
+                                    </div>
+                                    
+                                    <!-- Integrated Stats Bar (Nested to align with Grid center) -->
+                                    <div class="flex items-center mt-12 pt-10 border-t border-white/[0.03]">
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <span class="text-zinc-600 font-label uppercase tracking-[0.3em] text-[8px]">Total Impact</span>
+                                            <div class="flex items-baseline gap-2">
+                                                <span class="text-xl font-headline text-white tracking-widest">40+</span>
+                                                <span class="text-zinc-600 font-label uppercase text-[8px] tracking-widest">Stars</span>
+                                            </div>
+                                        </div>
+                                        <div class="w-px h-8 bg-white/[0.05]"></div>
+                                        <div class="flex-1 flex flex-col items-center gap-1">
+                                            <span class="text-zinc-600 font-label uppercase tracking-[0.3em] text-[8px]">Last Year Activity</span>
+                                            <div class="flex items-baseline gap-2">
+                                                <span id="total-contributions" class="text-xl font-headline text-primary tracking-widest">--</span>
+                                                <span class="text-zinc-600 font-label uppercase text-[8px] tracking-widest">Contributions</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="py-24 md:py-32 px-6 md:px-24 bg-white bg-grid-black text-black">
+            <div class="max-w-4xl mx-auto relative z-10">
+                <!-- Section Header -->
+                <div class="mb-12">
+                    <span class="text-[#A27DFF] font-label text-xs uppercase tracking-[0.3em] block mb-2">Verified Credentials</span>
+                    <h2 class="text-4xl md:text-5xl font-headline font-light tracking-tight">Certifications</h2>
+                </div>
+
+                <!-- Certifications List -->
+                <div class="flex flex-col" id="certs-list">
+
+                    <!-- Cert 1 -->
+                    <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#FF9900]/10">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#FF9900"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">AWS Certified Cloud Practitioner</p>
+                            <p class="text-zinc-400 text-xs mt-0.5 font-label">@ Amazon Web Services &nbsp;|&nbsp; 2024</p>
+                        </div>
+                        <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
+                    </a>
+
+                    <!-- Cert 2 -->
+                    <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#0866FF]/10">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#0866FF">
+                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">Meta Front-End Developer Professional</p>
+                            <p class="text-zinc-400 text-xs mt-0.5 font-label">@ Meta &nbsp;|&nbsp; 2023</p>
+                        </div>
+                        <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
+                    </a>
+
+                    <!-- Cert 3 -->
+                    <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#4285F4]/10">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="#4285F4"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">Google UX Design Professional Certificate</p>
+                            <p class="text-zinc-400 text-xs mt-0.5 font-label">@ Google &nbsp;|&nbsp; 2023</p>
+                        </div>
+                        <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
+                    </a>
+
+                    <!-- Cert 4 -->
+                    <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#00C4A1]/10">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#00C4A1">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">Responsive Web Design Certification</p>
+                            <p class="text-zinc-400 text-xs mt-0.5 font-label">@ freeCodeCamp &nbsp;|&nbsp; 2022</p>
+                        </div>
+                        <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
+                    </a>
+
+                    <!-- Hidden certs (shown on "+ More" click) -->
+                    <div id="extra-certs" class="hidden flex-col">
+                        <!-- Cert 5 -->
+                        <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#F7931A]/10">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#F7931A">
+                                    <path d="M11.5 2C6.26 2 2 6.26 2 11.5S6.26 21 11.5 21 21 16.74 21 11.5 16.74 2 11.5 2zm.5 12h-2V7h2v7zm0 3h-2v-2h2v2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">JavaScript Algorithms & Data Structures</p>
+                                <p class="text-zinc-400 text-xs mt-0.5 font-label">@ freeCodeCamp &nbsp;|&nbsp; 2022</p>
+                            </div>
+                            <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
+                        </a>
+
+                        <!-- Cert 6 -->
+                        <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-purple-500/10">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#a855f7">
+                                    <path d="M12 3L1 9l4 2.18V15c0 1.1 3.13 3 7 3s7-1.9 7-3v-3.82L23 9 12 3zm0 14c-2.67 0-6-1.24-6-2s3.33-2 6-2 6 1.24 6 2-3.33 2-6 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">Python for Everybody Specialization</p>
+                                <p class="text-zinc-400 text-xs mt-0.5 font-label">@ Coursera / U-Michigan &nbsp;|&nbsp; 2023</p>
+                            </div>
+                            <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
+                        </a>
+                    </div>
+
+                    <!-- Last border -->
+                    <div class="border-t border-zinc-100"></div>
+                </div>
+
+                <!-- Show More Button -->
+                <div class="flex justify-center mt-8">
+                    <button id="certs-toggle" onclick="toggleCerts()" class="border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-800 transition-all font-label text-xs uppercase tracking-widest px-8 py-3 rounded-full">
+                        + 2 More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact / Socials Section -->
+        <section id="contact" class="py-16 md:py-20 px-6 md:px-24 bg-white bg-grid-black">
+            <div class="max-w-4xl mx-auto relative z-10">
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 bg-white rounded-3xl px-8 md:px-12 py-10 md:py-12 shadow-[0_4px_40px_-8px_rgba(0,0,0,0.06)] border border-zinc-100">
+                    
+                    <!-- Left: Illustration -->
+                    <div class="shrink-0 w-40 md:w-56 relative z-10">
+                        <img src="/assets/desk-illustration.png" alt="Developer at desk illustration" class="w-full h-auto object-contain select-none pointer-events-none">
+                    </div>
+
+                    <!-- Right: Contact Info -->
+                    <div class="flex flex-col gap-5 flex-1">
+                        <!-- Socials Label -->
+                        <div>
+                            <span class="text-zinc-400 font-label text-xs uppercase tracking-[0.3em] block mb-3">Socials</span>
+                            <div class="flex items-center gap-4">
+                                <!-- LinkedIn -->
+                                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" class="w-9 h-9 rounded-lg bg-zinc-100 hover:bg-[#0A66C2] hover:text-white flex items-center justify-center text-zinc-500 transition-all duration-200 group">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                </a>
+                                <!-- X (Twitter) -->
+                                <a href="https://twitter.com" target="_blank" aria-label="X / Twitter" class="w-9 h-9 rounded-lg bg-zinc-100 hover:bg-black hover:text-white flex items-center justify-center text-zinc-500 transition-all duration-200">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                                    </svg>
+                                </a>
+                                <!-- GitHub -->
+                                <a href="https://github.com/ilyasstrougouty" target="_blank" aria-label="GitHub" class="w-9 h-9 rounded-lg bg-zinc-100 hover:bg-zinc-900 hover:text-white flex items-center justify-center text-zinc-500 transition-all duration-200">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tagline -->
+                        <p class="text-zinc-500 text-sm font-light tracking-wide">
+                            Full-Stack Developer &nbsp;•&nbsp; Open Source Builder &nbsp;•&nbsp; Precision Architect
+                        </p>
+
+                        <!-- CTA Button -->
+                        <div>
+                            <a href="mailto:hello@example.com" class="inline-flex items-center gap-2 border border-zinc-200 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white text-zinc-700 font-label text-sm tracking-wide px-6 py-2.5 rounded-full transition-all duration-300">
+                                Let's Talk
+                                <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="w-full py-24 px-12 flex flex-col md:flex-row justify-between items-center gap-12 bg-zinc-950">
+            <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-500">
+                © 2024 THE ARCHITECTURAL MONOLITH. BUILT WITH PRECISION.
+            </div>
+            <div class="flex gap-12 font-mono text-[10px] tracking-[0.2em] uppercase">
+                <a class="text-zinc-600 hover:text-white transition-colors" href="#">Sitemap</a>
+                <a class="text-zinc-600 hover:text-white transition-colors" href="#">Source</a>
+                <a class="text-zinc-600 hover:text-white transition-colors" href="#">Privacy</a>
+            </div>
+        </footer>
+
+        <!-- Dynamic Map SVG (Placed behind content wrappers but above section backgrounds) -->
+        <svg id="scroll-map-svg" class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+            <defs>
+                <mask id="line-mask">
+                    <path id="mask-path" fill="none" class="stroke-white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="" />
+                </mask>
+            </defs>
+            <path id="draw-path" fill="none" class="stroke-[#A27DFF]" stroke-width="2" stroke-dasharray="8 8" stroke-linecap="round" stroke-linejoin="round" mask="url(#line-mask)" d="" />
+        </svg>
+    </main>
+
+
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface": "#131315",
+                "on-surface": "#e5e1e4",
+                "primary": "#ffffff",
+                "on-primary": "#1a1c1c",
+                "surface-container-low": "#1c1b1d",
+                "surface-container-high": "#2a2a2c",
+                "surface-container-highest": "#353437",
+                "surface-container-lowest": "#0e0e10",
+                "outline-variant": "#474747",
+              },
+              fontFamily: {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Space Grotesk"]
+              },
+            },
+          },
+        }
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>
