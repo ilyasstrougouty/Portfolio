@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-    <title>ARCHITECT.OS | Portfolio</title>
+    <title>Ilyass_T | Portfolio</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="style.css">
+    <script src="translations.js"></script>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary overflow-x-hidden">
 
@@ -21,15 +22,35 @@
     <!-- Main Content (Hidden Initially) -->
     <main id="main-content" class="relative invisible opacity-0 transition-opacity duration-1000">
         <!-- Top Navigation -->
-        <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex justify-between items-center px-6 md:px-8 py-3 bg-zinc-950/80 backdrop-blur-xl rounded-full w-[94%] max-w-5xl shadow-[0_40px_40px_-10px_rgba(0,0,0,0.08)]">
-            <div class="text-xs md:text-xl font-thin tracking-widest text-white shrink-0">ARCHITECT.OS</div>
-            <div class="hidden md:flex items-center gap-6 lg:gap-8 font-inter tracking-tight font-light transition-all">
-                <a class="text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Projects</a>
-                <a class="text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Stack</a>
-                <a class="text-white font-medium border-b border-white/40 pb-1" href="#">Experience</a>
-                <a class="text-zinc-500 hover:text-zinc-200 transition-colors" href="#">Contact</a>
+        <nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center px-4 md:px-6 py-3 bg-zinc-950/80 backdrop-blur-xl rounded-full w-[94%] max-w-5xl shadow-[0_40px_40px_-10px_rgba(0,0,0,0.08)]">
+            <!-- Left helper to push items to center -->
+            <div class="hidden md:flex flex-1 items-center">
+                <div class="text-xs md:text-xl font-thin tracking-widest text-white shrink-0"></div>
             </div>
-            <button class="bg-primary text-on-primary px-4 md:px-6 py-1.5 md:py-2 rounded-full font-label text-[10px] md:text-sm font-medium hover:scale-105 transition-transform duration-300 shrink-0">Resume</button>
+
+            <!-- Mobile Left Logo Placeholder -->
+            <div class="md:hidden flex-1 flex items-center">
+                 <div class="text-[12px] font-bold tracking-widest text-[#A27DFF]">IT</div>
+            </div>
+
+            <!-- Center: Nav Links -->
+            <div class="hidden md:flex items-center gap-6 lg:gap-8 font-inter tracking-tight font-light transition-all flex-none">
+                <a class="nav-link text-white hover:text-zinc-200 transition-all border-b border-transparent pb-1" href="#projects" data-i18n="nav.projects">Projects</a>
+                <a class="nav-link text-white hover:text-zinc-200 transition-all border-b border-transparent pb-1" href="#skills" data-i18n="nav.skills">Skills</a>
+                <a class="nav-link text-white hover:text-zinc-200 transition-all border-b border-transparent pb-1" href="#education" data-i18n="nav.experience">Education</a>
+                <a class="nav-link text-white hover:text-zinc-200 transition-all border-b border-transparent pb-1" href="#contact" data-i18n="nav.contact">Contact</a>
+            </div>
+            
+            <!-- Right: Actions -->
+            <div class="flex-1 flex justify-end items-center gap-3 md:gap-4">
+                <!-- Language Toggle -->
+                <button id="lang-toggle" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-800/50 hover:bg-zinc-800 border border-white/10 transition-colors text-xs font-label uppercase text-zinc-300 shrink-0">
+                    <span class="text-white">EN</span>
+                    <span class="text-zinc-600">/</span>
+                    <span class="text-zinc-500 hover:text-white transition-colors">FR</span>
+                </button>
+                <button class="bg-primary text-on-primary px-4 md:px-6 py-1.5 md:py-2 rounded-full font-label text-[10px] md:text-sm font-medium hover:scale-105 transition-transform duration-300 shrink-0">CV</button>
+            </div>
         </nav>
 
 
@@ -38,15 +59,15 @@
         <!-- Hero Section -->
         <section class="min-h-screen bg-white bg-grid-black text-black flex items-center px-6 md:px-24 py-20 md:py-32 overflow-hidden">
             <div class="max-w-7xl w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
-                <h2 class="text-4xl md:text-[8rem] xl:text-[10rem] font-headline font-thin leading-none tracking-tighter text-left reveal">
-                    Hi, I'm Ben.
+                <h2 class="text-4xl md:text-[8rem] xl:text-[8rem] font-headline font-thin leading-[1.15] tracking-tighter text-left reveal" data-i18n="hero.title">
+                    Hi, I'm Ilyass Trougouty.
                 </h2>
                 <div class="flex flex-col gap-10 lg:pt-20 reveal-delay">
-                    <p class="text-2xl md:text-3xl text-zinc-600 font-light leading-relaxed max-w-xl">
-                        A full-stack architect specializing in GitHub-driven performance and digital precision. Bridging intuition and machine logic.
+                    <p class="text-2xl md:text-2xl text-zinc-600 font-light leading-relaxed max-w-xl" data-i18n="hero.subtitle">
+                        An aspiring AI engineer, currently in 3rd year of ENIAD, I spend my time creating Ai solutions for the daily problems i face.
                     </p>
                     <button class="bg-black text-white w-fit px-10 py-5 rounded-full flex items-center gap-4 text-xl font-medium transition-transform hover:scale-105 active:scale-95 group">
-                        Get in Touch
+                        <span data-i18n="hero.cta">Get in Touch</span>
                         <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
                     </button>
                 </div>
@@ -54,35 +75,36 @@
         </section>
 
         <!-- Education Section -->
-        <section class="bg-[#09090b] bg-grid-white py-32 px-6 md:px-24">
+        <section id="education" class="bg-[#09090b] bg-grid-white py-32 px-6 md:px-24">
             <div class="max-w-5xl mx-auto relative z-10">
                 <div class="flex flex-col gap-4 mb-20">
-                    <span class="font-label text-sm text-primary/40 uppercase tracking-[0.3em]">Knowledge Base</span>
-                    <h3 class="text-5xl font-headline font-thin text-white">Academic Trajectory</h3>
+                    <h3 class="text-5xl font-headline font-thin text-white" data-i18n="academic.title">Academic Trajectory</h3>
                 </div>
                 <div class="relative pl-12 md:pl-24">
                     <div class="absolute left-[23px] md:left-[47px] top-0 bottom-0 w-px bg-outline-variant/30"></div>
-                    <!-- Item 1 -->
+                    <!-- Item 1: Engineer's degree (ENIADB) - Most Recent -->
                     <div class="relative mb-24 last:mb-0 reveal">
-                        <div class="absolute -left-[54px] md:-left-[78px] top-0 w-12 h-12 bg-white rounded-full flex items-center justify-center z-10">
-                            <img class="w-8 h-8 rounded-full grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnskPsBnOeg-Hhy1L1omT6FxcsXazk1bhhQALC8uDY7kbBPvoZ2Mg33qK4_whduT5VbyL7keokNG_bYmx53To_x4gtBh4cCRfFEXawf_gSDAw7DZBJZBkiK1nxq2N90K3hxPUMopYvDBOu36CN_LqGShKQIXvhwYX7m1zs-8i-1oSLiQIMOL7MW5FYT0vUpZHtyDT2Rgk2VYZlfeMpg5-0p8lQ3acftenE4a8OXPM9RfWfneDKFWTimzNge2WpPeeFykuyOSskOdk"/>
+                        <div class="absolute -left-[54px] md:-left-[78px] top-0 w-12 h-12 bg-white rounded-full flex items-center justify-center z-10 overflow-hidden border border-zinc-100 shadow-sm">
+                            <img class="w-full h-full object-cover scale-110" src="assets/eniad-logo.jpg" alt="ENIADB Berkane Logo"/>
                         </div>
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                             <div>
-                                <h4 class="text-2xl font-semibold text-white mb-2">MSc in Artificial Intelligence</h4>
-                                <p class="text-zinc-500 font-label tracking-wide uppercase text-sm">Stanford University • 2021 — 2023</p>
+                                <h4 class="text-2xl font-semibold text-white mb-1" data-i18n="academic.eniadb">Engineer's degree</h4>
+                                <p class="text-zinc-500 font-label tracking-wide uppercase text-sm" data-i18n="academic.eniadb_desc">Ecole Nationale de l'intelligence Artificielle et du digital de berkane (ENIADB)</p>
+                                <p class="text-zinc-600 font-label text-xs mt-1">Aug 2025 — Sep 2028</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Item 2 -->
+                    <!-- Item 2: Deug Genie informatique (UMP) -->
                     <div class="relative mb-24 last:mb-0 reveal">
-                        <div class="absolute -left-[54px] md:-left-[78px] top-0 w-12 h-12 bg-white rounded-full flex items-center justify-center z-10">
-                            <img class="w-8 h-8 rounded-full grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC64bLjxZvr_L_dGE2PtZHfF-JYpDHtyZRf0m_CLtfXhoixleTO1H-4R6XTX32Rul_70edtAlD1NhejBK9h4qSvVsUXcAhYqazjmGig-ZqsufM_hCAU-xoPy9i64SMmrjTYG3yXZem3KdPQbb62A1F0urt_GsOyDzIeiyc4ywIc1cNQPr0Kt5N-5JqWFnZCYrhl9qGf27XJBZNVJXiU6cir-8MYzj44PsZyUFuj7f84zLDZDcFUtJjfAljlMTc3MdCRG0fbokfunR4"/>
+                        <div class="absolute -left-[54px] md:-left-[78px] top-0 w-12 h-12 bg-white rounded-full flex items-center justify-center z-10 overflow-hidden border border-zinc-100 shadow-sm">
+                            <img class="w-10 h-10 object-contain" src="assets/ump-logo.jpg" alt="UMP Oujda Logo"/>
                         </div>
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                             <div>
-                                <h4 class="text-2xl font-semibold text-white mb-2">BSc in Software Engineering</h4>
-                                <p class="text-zinc-500 font-label tracking-wide uppercase text-sm">MIT • 2017 — 2021</p>
+                                <h4 class="text-2xl font-semibold text-white mb-1" data-i18n="academic.ump">Deug Genie informatique</h4>
+                                <p class="text-zinc-500 font-label tracking-wide uppercase text-sm" data-i18n="academic.ump_desc">Université Mohammed Premier oujda</p>
+                                <p class="text-zinc-600 font-label text-xs mt-1">Sep 2023 — Aug 2025</p>
                             </div>
                         </div>
                     </div>
@@ -91,80 +113,73 @@
         </section>
 
         <!-- Skills Section -->
-        <section class="bg-surface bg-grid-white py-32 px-6 md:px-24">
+        <section id="skills" class="bg-surface bg-grid-white py-32 px-6 md:px-24">
             <div class="max-w-7xl mx-auto relative z-10">
                 <div class="flex flex-col gap-4 mb-16">
-                    <span class="font-label text-sm text-primary/40 uppercase tracking-[0.3em]">System Modules</span>
-                    <h3 class="text-4xl font-headline font-thin text-white tracking-tight">Skills &amp; Stack</h3>
+                    <h3 class="text-4xl font-headline font-thin text-white tracking-tight" data-i18n="skills.title">Skills &amp; Stack</h3>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Backend Card -->
-                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-green-400 font-mono text-sm">$</span>
-                            <h4 class="text-lg font-semibold text-white font-label">Backend Engineering</h4>
-                        </div>
-                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">Building scalable, reliable, and secure server-side systems. Performance-first architecture.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">python</span>
-                            <span class="skill-tag">node.js</span>
-                            <span class="skill-tag">express</span>
-                            <span class="skill-tag">postgresql</span>
-                            <span class="skill-tag">redis</span>
-                            <span class="skill-tag">graphql</span>
-                            <span class="skill-tag">docker</span>
-                        </div>
-                    </div>
-
-                    <!-- Frontend Card -->
-                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-cyan-400 font-mono text-sm">~</span>
-                            <h4 class="text-lg font-semibold text-white font-label">Frontend &amp; Design</h4>
-                        </div>
-                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">Crafting polished interfaces with smooth animations and pixel-perfect attention to detail.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">react</span>
-                            <span class="skill-tag">next.js</span>
-                            <span class="skill-tag">typescript</span>
-                            <span class="skill-tag">tailwindcss</span>
-                            <span class="skill-tag">figma</span>
-                            <span class="skill-tag">framer-motion</span>
-                        </div>
-                    </div>
-
-                    <!-- Cloud & DevOps Card -->
-                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-yellow-400 font-mono text-sm">#</span>
-                            <h4 class="text-lg font-semibold text-white font-label">Cloud &amp; DevOps</h4>
-                        </div>
-                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">Deploying and managing production systems across major cloud providers with CI/CD pipelines.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">aws</span>
-                            <span class="skill-tag">gcp</span>
-                            <span class="skill-tag">vercel</span>
-                            <span class="skill-tag">kubernetes</span>
-                            <span class="skill-tag">terraform</span>
-                            <span class="skill-tag">github-actions</span>
-                        </div>
-                    </div>
-
-                    <!-- AI & Data Card -->
+                    <!-- Machine Learning & LLM Card -->
                     <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
                         <div class="flex items-center gap-3 mb-4">
                             <span class="text-purple-400 font-mono text-sm">&gt;</span>
-                            <h4 class="text-lg font-semibold text-white font-label">AI &amp; Machine Learning</h4>
+                            <h4 class="text-lg font-semibold text-white font-label" data-i18n="skills.ml">Machine Learning &amp; LLM</h4>
                         </div>
-                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">Designing and training models, building intelligent pipelines, and integrating LLMs into products.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-tag">pytorch</span>
+                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6" data-i18n="skills.ml_desc">Designing and training models, building intelligent RAG pipelines, and integrating neural networks.</p>
+                        <div class="flex flex-wrap gap-2 justify-center">
+                            <span class="skill-tag">machine learning</span>
+                            <span class="skill-tag">rag</span>
+                            <span class="skill-tag">neural networks</span>
+                            <span class="skill-tag">algorithms</span>
                             <span class="skill-tag">tensorflow</span>
-                            <span class="skill-tag">langchain</span>
-                            <span class="skill-tag">openai</span>
-                            <span class="skill-tag">huggingface</span>
+                        </div>
+                    </div>
+
+                    <!-- Data Analysis Card -->
+                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-cyan-400 font-mono text-sm">~</span>
+                            <h4 class="text-lg font-semibold text-white font-label" data-i18n="skills.data">Data Analysis</h4>
+                        </div>
+                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6" data-i18n="skills.data_desc">Uncovering insights through robust data manipulation, structures, and visualization techniques.</p>
+                        <div class="flex flex-wrap gap-2 justify-center">
+                            <span class="skill-tag">python</span>
+                            <span class="skill-tag">data structures</span>
                             <span class="skill-tag">pandas</span>
+                            <span class="skill-tag">matplotlib</span>
+                            <span class="skill-tag">numpy</span>
+                        </div>
+                    </div>
+
+                    <!-- Web & Programming Card -->
+                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-green-400 font-mono text-sm">$</span>
+                            <h4 class="text-lg font-semibold text-white font-label" data-i18n="skills.web">Web &amp; Programming</h4>
+                        </div>
+                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6" data-i18n="skills.web_desc">Building containerized applications, scalable databases, and designing modern interfaces.</p>
+                        <div class="flex flex-wrap gap-2 justify-center">
+                            <span class="skill-tag">html/css</span>
+                            <span class="skill-tag">java</span>
+                            <span class="skill-tag">c</span>
+                            <span class="skill-tag">c++</span>
+                            <span class="skill-tag">mysql</span>
+                        </div>
+                    </div>
+
+                    <!-- Version Control & Infrastructure Card -->
+                    <div class="skill-card border border-white/10 rounded-xl p-8 bg-surface-container-low/50 hover:border-white/20 transition-all duration-300 reveal">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-yellow-400 font-mono text-sm">#</span>
+                            <h4 class="text-lg font-semibold text-white font-label" data-i18n="skills.version">Version Control &amp; Infrastructure</h4>
+                        </div>
+                        <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6" data-i18n="skills.version_desc">Collaborating, managing codebases, and maintaining trackable system histories.</p>
+                        <div class="flex flex-wrap gap-2 justify-center">
+                            <span class="skill-tag">git</span>
+                            <span class="skill-tag">github</span>
+                            <span class="skill-tag">linux</span>
+                            <span class="skill-tag">docker</span>
                         </div>
                     </div>
                 </div>
@@ -172,14 +187,13 @@
         </section>
 
         <!-- Featured Projects Section -->
-        <section class="bg-surface-container-lowest bg-grid-white py-32 px-6 md:px-24">
+        <section id="projects" class="bg-surface-container-lowest bg-grid-white py-32 px-6 md:px-24">
             <div class="max-w-7xl mx-auto relative z-10">
                 <div class="flex justify-between items-end mb-16">
                     <div class="flex flex-col gap-4">
-                        <span class="font-label text-sm text-primary/40 uppercase tracking-[0.3em]">~/projects</span>
-                        <h3 class="text-4xl font-headline font-thin text-white tracking-tight">Featured Projects</h3>
+                        <h3 class="text-4xl font-headline font-thin text-white tracking-tight" data-i18n="projects.title">Projects</h3>
                     </div>
-                    <a class="text-zinc-500 hover:text-white flex items-center gap-2 transition-colors font-label text-sm" href="#">View all <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+                    <a class="text-zinc-500 hover:text-white flex items-center gap-2 transition-colors font-label text-sm" href="#"><span data-i18n="projects.view_all">View all</span> <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -192,19 +206,17 @@
                                 <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></div>
                                 <div class="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
                             </div>
-                            <span class="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">ben/neural-engine</span>
+                            <span class="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">ilyasstrougouty/tikkocampus</span>
                         </div>
                         <!-- Card Body -->
                         <div class="p-8">
-                            <h4 class="text-xl font-semibold text-white mb-2 font-label group-hover:text-zinc-200 transition-colors">Neural Engine</h4>
-                            <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">A high-performance inference engine for running transformer models locally. Supports ONNX, TensorRT, and custom quantization schemes.</p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="skill-tag">rust</span>
-                                <span class="skill-tag">cuda</span>
-                                <span class="skill-tag">onnx</span>
-                                <span class="skill-tag">wasm</span>
+                            <h4 class="text-xl font-semibold text-white mb-2 font-label group-hover:text-zinc-200 transition-colors">tikkocampus</h4>
+                            <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6" data-i18n="projects.tikko_desc">Innovative AI solution project built for campus scale problems. Specific architecture and impact details coming soon.</p>
+                            <div class="flex flex-wrap gap-2 mb-6 justify-center">
+                                <span class="skill-tag">machine learning</span>
+                                <span class="skill-tag">python</span>
                             </div>
-                            <div class="flex items-center gap-4 text-zinc-600 font-mono text-xs">
+                            <div class="flex items-center gap-4 text-zinc-600 font-mono text-xs justify-center">
                                 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span> 342</span>
                                 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call_split</span> 48</span>
                             </div>
@@ -219,18 +231,16 @@
                                 <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></div>
                                 <div class="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
                             </div>
-                            <span class="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">ben/architect-cli</span>
+                            <span class="font-mono text-[10px] text-zinc-600 uppercase tracking-widest">ilyasstrougouty/lets-stutter</span>
                         </div>
                         <div class="p-8">
-                            <h4 class="text-xl font-semibold text-white mb-2 font-label group-hover:text-zinc-200 transition-colors">Architect CLI</h4>
-                            <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6">A zero-config scaffolding tool for full-stack apps. Generates project structure, CI/CD pipelines, and deployment configs in seconds.</p>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="skill-tag">typescript</span>
-                                <span class="skill-tag">node.js</span>
-                                <span class="skill-tag">cli</span>
-                                <span class="skill-tag">devtools</span>
+                            <h4 class="text-xl font-semibold text-white mb-2 font-label group-hover:text-zinc-200 transition-colors">let's stutter</h4>
+                            <p class="text-zinc-500 text-sm font-mono leading-relaxed mb-6" data-i18n="projects.stutter_desc">Specialized solution exploring ML models and speech intelligence. Upcoming documentation and specific technical details.</p>
+                            <div class="flex flex-wrap gap-2 mb-6 justify-center">
+                                <span class="skill-tag">deep learning</span>
+                                <span class="skill-tag">tensor flow</span>
                             </div>
-                            <div class="flex items-center gap-4 text-zinc-600 font-mono text-xs">
+                            <div class="flex items-center gap-4 text-zinc-600 font-mono text-xs justify-center">
                                 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span> 187</span>
                                 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">call_split</span> 23</span>
                             </div>
@@ -241,7 +251,7 @@
                 <!-- Show More Link -->
                 <div class="flex justify-center mt-12">
                     <a href="https://github.com/ilyasstrougouty" target="_blank" class="text-zinc-500 hover:text-white flex items-center gap-2 transition-all duration-300 font-mono text-sm group">
-                        Show more
+                        <span data-i18n="projects.show_more">Show more</span>
                         <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                     </a>
                 </div>
@@ -254,10 +264,9 @@
                 <div class="flex flex-col gap-10 md:gap-12">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                         <div class="flex flex-col gap-3 md:gap-4">
-                             <span class="font-label text-[10px] md:text-sm text-primary/40 uppercase tracking-[0.3em]">Contribution Records</span>
-                             <h3 class="text-3xl md:text-5xl font-headline font-thin text-white tracking-tight">Public Contributions</h3>
+                             <h3 class="text-3xl md:text-5xl font-headline font-thin text-white tracking-tight" data-i18n="github.title">Public Contributions</h3>
                         </div>
-                        <a class="text-zinc-500 hover:text-white flex items-center gap-2 transition-colors font-label text-[10px] md:text-sm" href="https://github.com/ilyasstrougouty" target="_blank">View profile <span class="material-symbols-outlined text-sm">open_in_new</span></a>
+                        <a class="text-zinc-500 hover:text-white flex items-center gap-2 transition-colors font-label text-[10px] md:text-sm" href="https://github.com/ilyasstrougouty" target="_blank"><span data-i18n="github.view_profile">View profile</span> <span class="material-symbols-outlined text-sm">open_in_new</span></a>
                     </div>
 
                     <!-- Exact GitHub Dark Grid (Responsive & Centered) -->
@@ -313,95 +322,83 @@
             <div class="max-w-4xl mx-auto relative z-10">
                 <!-- Section Header -->
                 <div class="mb-12">
-                    <span class="text-[#A27DFF] font-label text-xs uppercase tracking-[0.3em] block mb-2">Verified Credentials</span>
+                    <span class="text-[#A27DFF] font-label text-xs uppercase tracking-[0.3em] block mb-2" data-i18n="certs.title">Verified Credentials</span>
                     <h2 class="text-4xl md:text-5xl font-headline font-light tracking-tight">Certifications</h2>
                 </div>
 
                 <!-- Certifications List -->
                 <div class="flex flex-col" id="certs-list">
 
-                    <!-- Cert 1 -->
+                    <!-- Cert 1: ML -->
                     <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#FF9900]/10">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#FF9900"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#FF9900]/5 overflow-hidden">
+                            <img class="w-7 h-7 object-contain" src="assets/deeplearning-logo.jpg" alt="DeepLearning.AI Logo"/>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">AWS Certified Cloud Practitioner</p>
-                            <p class="text-zinc-400 text-xs mt-0.5 font-label">@ Amazon Web Services &nbsp;|&nbsp; 2024</p>
+                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors" data-i18n="certs.ml">Machine Learning Specialization</p>
+                            <p class="text-zinc-400 text-xs mt-0.5 font-label" data-i18n="certs.ml_org">@ Deeplearning.AI</p>
                         </div>
                         <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
                     </a>
 
-                    <!-- Cert 2 -->
+                    <!-- Cert 2: CS50 -->
                     <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#0866FF]/10">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#0866FF">
-                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden border border-zinc-100 relative">
+                            <img src="assets/cs50-logo.png" alt="CS50/Harvard Logo" class="w-full h-full object-cover"/>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">Meta Front-End Developer Professional</p>
-                            <p class="text-zinc-400 text-xs mt-0.5 font-label">@ Meta &nbsp;|&nbsp; 2023</p>
+                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors" data-i18n="certs.cs50">CS50: Introduction to Computer Science</p>
+                            <p class="text-zinc-400 text-xs mt-0.5 font-label" data-i18n="certs.cs50_org">@ Harvard University</p>
                         </div>
                         <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
                     </a>
 
-                    <!-- Cert 3 -->
+                    <!-- Cert 3: EFSET -->
                     <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#4285F4]/10">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="#4285F4"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden border border-zinc-100 relative">
+                            <img src="assets/efset-logo.png" alt="EFSET Logo" class="w-full h-full object-cover"/>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">Google UX Design Professional Certificate</p>
-                            <p class="text-zinc-400 text-xs mt-0.5 font-label">@ Google &nbsp;|&nbsp; 2023</p>
+                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors" data-i18n="certs.efset">EFSET English Certificate C1 Level</p>
+                            <p class="text-zinc-400 text-xs mt-0.5 font-label" data-i18n="certs.efset_org">@ EF Education First</p>
                         </div>
                         <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
                     </a>
 
-                    <!-- Cert 4 -->
+                    <!-- Cert 4: McKinsey -->
                     <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#00C4A1]/10">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#00C4A1">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                            </svg>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden border border-zinc-100 relative">
+                            <img src="assets/mckinsey-logo.jpg" alt="McKinsey & Company Logo" class="w-full h-full object-cover"/>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">Responsive Web Design Certification</p>
-                            <p class="text-zinc-400 text-xs mt-0.5 font-label">@ freeCodeCamp &nbsp;|&nbsp; 2022</p>
+                            <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors" data-i18n="certs.mckinsey">Mckinsey Forward for Soft Skills</p>
+                            <p class="text-zinc-400 text-xs mt-0.5 font-label" data-i18n="certs.mckinsey_org">@ McKinsey &amp; Company</p>
                         </div>
                         <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
                     </a>
 
                     <!-- Hidden certs (shown on "+ More" click) -->
                     <div id="extra-certs" class="hidden flex-col">
-                        <!-- Cert 5 -->
+                        <!-- Cert 5: Python For AI -->
                         <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
-                            <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-[#F7931A]/10">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#F7931A">
-                                    <path d="M11.5 2C6.26 2 2 6.26 2 11.5S6.26 21 11.5 21 21 16.74 21 11.5 16.74 2 11.5 2zm.5 12h-2V7h2v7zm0 3h-2v-2h2v2z"/>
-                                </svg>
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden border border-zinc-100 relative">
+                                <img src="assets/coursera-logo.png" alt="Coursera Logo" class="w-full h-full object-cover"/>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">JavaScript Algorithms & Data Structures</p>
-                                <p class="text-zinc-400 text-xs mt-0.5 font-label">@ freeCodeCamp &nbsp;|&nbsp; 2022</p>
+                                <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors" data-i18n="certs.python">Python for AI</p>
+                                <p class="text-zinc-400 text-xs mt-0.5 font-label" data-i18n="certs.python_org">@ Coursera / DeepLearning.AI</p>
                             </div>
                             <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
                         </a>
 
-                        <!-- Cert 6 -->
+                        <!-- Cert 6: SQL -->
                         <a href="#" target="_blank" class="cert-item group flex items-center gap-5 py-5 border-t border-zinc-100 hover:bg-zinc-50 transition-colors px-2 -mx-2 rounded-lg">
-                            <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 bg-purple-500/10">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#a855f7">
-                                    <path d="M12 3L1 9l4 2.18V15c0 1.1 3.13 3 7 3s7-1.9 7-3v-3.82L23 9 12 3zm0 14c-2.67 0-6-1.24-6-2s3.33-2 6-2 6 1.24 6 2-3.33 2-6 2z"/>
-                                </svg>
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden border border-zinc-100 relative">
+                                <img src="assets/coursera-logo.png" alt="Coursera Logo" class="w-full h-full object-cover"/>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors">Python for Everybody Specialization</p>
-                                <p class="text-zinc-400 text-xs mt-0.5 font-label">@ Coursera / U-Michigan &nbsp;|&nbsp; 2023</p>
+                                <p class="font-medium text-sm text-zinc-900 group-hover:text-black transition-colors" data-i18n="certs.sql">SQL for Data Science</p>
+                                <p class="text-zinc-400 text-xs mt-0.5 font-label" data-i18n="certs.sql_org">@ Coursera / UC Davis</p>
                             </div>
                             <span class="material-symbols-outlined text-zinc-300 group-hover:text-zinc-700 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-sm shrink-0">arrow_outward</span>
                         </a>
@@ -413,7 +410,7 @@
 
                 <!-- Show More Button -->
                 <div class="flex justify-center mt-8">
-                    <button id="certs-toggle" onclick="toggleCerts()" class="border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-800 transition-all font-label text-xs uppercase tracking-widest px-8 py-3 rounded-full">
+                    <button id="certs-toggle" onclick="toggleCerts()" class="border border-zinc-200 text-zinc-500 hover:border-zinc-400 hover:text-zinc-800 transition-all font-label text-xs uppercase tracking-widest px-8 py-3 rounded-full" data-i18n="certs.more">
                         + 2 More
                     </button>
                 </div>
@@ -434,7 +431,7 @@
                     <div class="flex flex-col gap-5 flex-1">
                         <!-- Socials Label -->
                         <div>
-                            <span class="text-zinc-400 font-label text-xs uppercase tracking-[0.3em] block mb-3">Socials</span>
+                            <span class="text-zinc-400 font-label text-xs uppercase tracking-[0.3em] block mb-3" data-i18n="contact.socials">Socials</span>
                             <div class="flex items-center gap-4">
                                 <!-- LinkedIn -->
                                 <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" class="w-9 h-9 rounded-lg bg-zinc-100 hover:bg-[#0A66C2] hover:text-white flex items-center justify-center text-zinc-500 transition-all duration-200 group">
@@ -459,13 +456,13 @@
 
                         <!-- Tagline -->
                         <p class="text-zinc-500 text-sm font-light tracking-wide">
-                            Full-Stack Developer &nbsp;•&nbsp; Open Source Builder &nbsp;•&nbsp; Precision Architect
+                            <span data-i18n="contact.role">AI Engineering Student  •  Open Source Builder  •  Precision Architect</span>
                         </p>
 
                         <!-- CTA Button -->
                         <div>
                             <a href="mailto:hello@example.com" class="inline-flex items-center gap-2 border border-zinc-200 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white text-zinc-700 font-label text-sm tracking-wide px-6 py-2.5 rounded-full transition-all duration-300">
-                                Let's Talk
+                                <span data-i18n="contact.lets_talk">Let's Talk</span>
                                 <span class="material-symbols-outlined text-sm">arrow_outward</span>
                             </a>
                         </div>
@@ -476,13 +473,13 @@
 
         <!-- Footer -->
         <footer class="w-full py-24 px-12 flex flex-col md:flex-row justify-between items-center gap-12 bg-zinc-950">
-            <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-500">
+            <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-500" data-i18n="footer.rights">
                 © 2024 THE ARCHITECTURAL MONOLITH. BUILT WITH PRECISION.
             </div>
             <div class="flex gap-12 font-mono text-[10px] tracking-[0.2em] uppercase">
-                <a class="text-zinc-600 hover:text-white transition-colors" href="#">Sitemap</a>
-                <a class="text-zinc-600 hover:text-white transition-colors" href="#">Source</a>
-                <a class="text-zinc-600 hover:text-white transition-colors" href="#">Privacy</a>
+                <a class="text-zinc-600 hover:text-white transition-colors" href="#" data-i18n="footer.sitemap">Sitemap</a>
+                <a class="text-zinc-600 hover:text-white transition-colors" href="#" data-i18n="footer.source">Source</a>
+                <a class="text-zinc-600 hover:text-white transition-colors" href="#" data-i18n="footer.privacy">Privacy</a>
             </div>
         </footer>
 

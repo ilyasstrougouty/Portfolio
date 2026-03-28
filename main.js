@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
     }
+
+    // Flag to prevent scroll events from interrupting the entrance animation of the SVG line
+    let isPathAnimating = true;
+
     // 1. Language Sequence Handler
     const greetings = [
         "Hello",
@@ -198,8 +202,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let x = 0;
 
             if (index === 0) {
-                // Hero section: Start near the left side
-                x = window.innerWidth * 0.2;
+                // Hero section: Start to the right of the name to avoid collision
+                x = window.innerWidth * 0.45;
+                y = section.offsetTop + (section.offsetHeight * 0.3);
                 isLeft = false;
             } else if (index === sections.length - 1) {
                 // Last section (Contact): Point directly to the "Let's Talk" button
@@ -244,15 +249,42 @@ document.addEventListener('DOMContentLoaded', () => {
         maskPath.setAttribute('d', d);
         drawPath.setAttribute('d', d);
 
-        // Prep mask for scroll-drawing
+        // Start fully hidden (ensure no transition is active while we set this)
+        maskPath.style.transition = 'none';
         const length = maskPath.getTotalLength();
         maskPath.style.strokeDasharray = length;
         maskPath.style.strokeDashoffset = length;
-        
-        animatePathOnScroll();
+
+        // Force a browser reflow so the hidden state is immediately applied
+        maskPath.getBoundingClientRect();
+
+        // Entrance animation: smoothly draw from 0 after a short delay
+        requestAnimationFrame(() => {
+                // Compute the target position based on current scroll
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight;
+                const maxScroll = Math.max(1, documentHeight - windowHeight);
+                const scrollFraction = Math.max(0, Math.min(1, scrollY / maxScroll));
+                const startPercent = (windowHeight * 0.5) / documentHeight;
+                const visiblePercent = startPercent + scrollFraction * (1 - startPercent);
+                const targetOffset = length - (length * visiblePercent);
+
+                // Apply CSS transition for the entrance animation
+                maskPath.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                maskPath.style.strokeDashoffset = targetOffset.toString();
+
+                // After animation finishes, remove transition so scroll is snappy
+                setTimeout(() => {
+                    maskPath.style.transition = 'none';
+                    isPathAnimating = false; // Release the lock
+                }, 1500);
+            });
     };
 
     const animatePathOnScroll = () => {
+        if (isPathAnimating) return; // Prevent scroll events from snapping the line while it's drawing its entrance
+
         const maskPath = document.getElementById('mask-path');
         if (!maskPath) return;
 
@@ -283,23 +315,122 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animatePathOnScroll);
     });
 
+    // 5. Language Switcher
+    let currentLang = localStorage.getItem('lang') || 'en';
+    
+    const updateLanguage = () => {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (window.translations && window.translations[currentLang] && window.translations[currentLang][key]) {
+                // If it's the cert toggle button and it's open, keep the 'Show Less' state translated
+                if (el.id === 'certs-toggle') {
+                    const extra = document.getElementById('extra-certs');
+                    if (extra && !extra.classList.contains('hidden')) {
+                        el.innerHTML = currentLang === 'fr' ? '− Voir Moins' : '− Show Less';
+                        return;
+                    }
+                }
+                el.innerHTML = window.translations[currentLang][key]; 
+            }
+        });
+
+        const langToggle = document.getElementById('lang-toggle');
+        if (langToggle) {
+            const spans = langToggle.querySelectorAll('span');
+            if (spans.length >= 3) {
+                if (currentLang === 'en') {
+                    spans[0].className = 'text-white';
+                    spans[2].className = 'text-zinc-500 hover:text-white transition-colors cursor-pointer';
+                } else {
+                    spans[0].className = 'text-zinc-500 hover:text-white transition-colors cursor-pointer';
+                    spans[2].className = 'text-white';
+                }
+            }
+        }
+        
+        document.documentElement.lang = currentLang;
+    };
+
+    updateLanguage();
+
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'fr' : 'en';
+            localStorage.setItem('lang', currentLang);
+            updateLanguage();
+        });
+    }
+
+    // 6. Navigation Highlighting Logic
+    const setupNavObserver = () => {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = Array.from(navLinks).map(link => {
+            const id = link.getAttribute('href').substring(1);
+            return document.getElementById(id);
+        }).filter(s => s);
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-40% 0px -50% 0px',
+            threshold: 0
+        };
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    navLinks.forEach(link => {
+                        const href = link.getAttribute('href').substring(1);
+                        if (href === id) {
+                            link.classList.add('text-white', 'border-white/40', 'font-semibold', 'scale-105');
+                            link.classList.remove('text-zinc-500', 'border-transparent');
+                        } else {
+                            link.classList.remove('text-white', 'border-white/40', 'font-semibold', 'scale-105');
+                            link.classList.add('text-zinc-500', 'border-transparent');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => navObserver.observe(section));
+
+        // Special case for Hero (Scroll to top)
+        window.addEventListener('scroll', () => {
+            if (window.scrollY < 100) {
+                navLinks.forEach(link => {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-zinc-500', 'border-white/40', 'font-semibold', 'scale-105');
+                    link.classList.add('border-transparent');
+                });
+            }
+        });
+    };
+
+    // Initialize observers
+    setupNavObserver();
+    
     // Initialize - Delay slightly to ensure smooth first frame
     setTimeout(cycleGreetings, 300);
 });
-
 // Certifications toggle (global so inline onclick works)
 function toggleCerts() {
     const extra = document.getElementById('extra-certs');
     const btn = document.getElementById('certs-toggle');
+    if (!extra || !btn) return;
+    
     const isHidden = extra.classList.contains('hidden');
+    const currentLang = document.documentElement.lang || 'en';
 
     if (isHidden) {
         extra.classList.remove('hidden');
         extra.classList.add('flex');
-        btn.textContent = '− Show Less';
+        btn.innerHTML = currentLang === 'fr' ? '− Voir Moins' : '− Show Less';
     } else {
         extra.classList.add('hidden');
         extra.classList.remove('flex');
-        btn.textContent = '+ 2 More';
+        btn.innerHTML = window.translations ? window.translations[currentLang]['certs.more'] : '+ 2 More';
     }
 }

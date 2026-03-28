@@ -12,6 +12,14 @@
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+    display: none;
+}
+
 /* Splash Screen Animation */
 #greeting {
     transition: opacity 0.4s ease, transform 0.4s var(--cubic-bezier);
@@ -92,9 +100,9 @@ body {
 }
 
 .skill-tag:hover {
-    color: #e4e4e7; /* zinc-200 */
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.04);
+    color: #A27DFF; /* Primary Purple */
+    border-color: rgba(162, 125, 255, 0.4);
+    background: rgba(162, 125, 255, 0.08);
 }
 
 /* Grid Backgrounds */
@@ -115,6 +123,15 @@ body {
 /* Map Line Draw Animation */
 #mask-path {
     transition: stroke-dashoffset 0.2s ease-out;
+}
+
+.nav-link {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.nav-link.active {
+    color: #ffffff !important;
 }
 
 /* Chatbot Scrollbar Aesthetics */
