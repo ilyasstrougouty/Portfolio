@@ -110,6 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Fetch GitHub Data
             fetchGitHubStats('ilyasstrougouty');
+            fetchRepoStats('tikkocampus', 'tikko');
+            fetchRepoStats('lets-stutter', 'stutter');
         }, 900);
     };
 
@@ -135,6 +137,40 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Fetch error:', error);
             if (totalCommitsEl) totalCommitsEl.textContent = '!';
+        }
+    };
+
+    // Fetch specific GitHub Repository Statistics (Stars, Forks, Description, Topics)
+    const fetchRepoStats = async (repoName, cardId) => {
+        try {
+            const response = await fetch(`https://api.github.com/repos/ilyasstrougouty/${repoName}`);
+            if (!response.ok) return;
+            const data = await response.json();
+            
+            const starsEl = document.getElementById(`${cardId}-stars`);
+            const forksEl = document.getElementById(`${cardId}-forks`);
+            const descEl = document.getElementById(`${cardId}-desc`);
+            const topicsEl = document.getElementById(`${cardId}-topics`);
+            
+            if (starsEl) starsEl.textContent = data.stargazers_count;
+            if (forksEl) forksEl.textContent = data.forks_count;
+            
+            if (descEl && data.description) {
+                descEl.textContent = data.description;
+                descEl.removeAttribute('data-i18n'); // Remove translation key to avoid overwrite
+            }
+            
+            if (topicsEl && data.topics && data.topics.length > 0) {
+                topicsEl.innerHTML = '';
+                data.topics.slice(0, 4).forEach(topic => {
+                    const span = document.createElement('span');
+                    span.className = 'skill-tag';
+                    span.textContent = topic.replace(/-/g, ' '); // simple formatting
+                    topicsEl.appendChild(span);
+                });
+            }
+        } catch (error) {
+            console.error(`Error fetching stats for ${repoName}:`, error);
         }
     };
 
