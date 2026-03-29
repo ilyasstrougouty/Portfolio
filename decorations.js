@@ -14,8 +14,9 @@ const DECORATIONS = {
     bird: `<svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M5 10 Q 15 5, 20 10 Q 25 5, 35 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="sketch-path" />
     </svg>`,
-    pin: `<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM12 11.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+    pin: `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21.5s-7-7-7-12.5a7 7 0 1114 0c0 5.5-7 12.5-7 12.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="sketch-path" />
+        <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5" />
     </svg>`
 };
 
@@ -31,41 +32,62 @@ function initDecorations() {
     const layer = document.getElementById('decorations-layer');
     if (!layer) return;
 
-    // 1. Sketchy Mountain in Hero
-    const heroMountain = createDecoration('mountain', 'text-zinc-600 w-48 opacity-20', {
-        top: '25%',
-        right: '10%',
-        transform: 'rotate(-5deg)'
+    // 1. TOP PURPLE PIN (Beginning of trajectory)
+    const topPin = createDecoration('pin', 'text-purple-500 w-8', {
+        top: '50px',
+        left: '50%',
+        transform: 'translateX(-50%)'
+    });
+    layer.appendChild(topPin);
+
+    // 2. HERO MOUNTAIN (Below the name)
+    const heroMountain = createDecoration('mountain', 'text-zinc-400 w-64 md:w-96 opacity-30', {
+        top: '400px',
+        right: '5%',
+        transform: 'rotate(-2deg)'
     });
     layer.appendChild(heroMountain);
 
-    // 2. Sketchy Birds in Hero/Projects
-    const birds = createDecoration('bird', 'text-zinc-500 w-12 opacity-30', {
-        top: '15%',
-        left: '15%',
-        transform: 'rotate(10deg)'
+    // 3. MIDDLE PINS (Anchored to section transitions)
+    const eduPin = createDecoration('pin', 'text-purple-500 w-8', {
+        top: '1200px', // Aproximately education section start
+        left: '10%'
     });
-    layer.appendChild(birds);
+    eduPin.id = 'decoration-edu-pin';
+    layer.appendChild(eduPin);
 
-    // 3. THE CIRCLE ABOVE ENIADB LOGO
-    const eniadCircle = createDecoration('circle', 'text-purple-500/40 w-24 h-24 transition-all duration-500', {
+    const projPin = createDecoration('pin', 'text-purple-400 w-8', {
+        top: '2200px', // Approximately projects section start
+        right: '10%'
+    });
+    projPin.id = 'decoration-proj-pin';
+    layer.appendChild(projPin);
+
+    // 4. THE SKETCHY CIRCLE ABOVE ENIADB
+    const eniadCircle = createDecoration('circle', 'text-purple-500/50 w-24 h-24', {
         zIndex: '5'
     });
     eniadCircle.id = 'decoration-eniad-circle';
     layer.appendChild(eniadCircle);
 
-    // 4. Another mountain near bottom
-    const bottomMountain = createDecoration('mountain', 'text-zinc-700 w-64 opacity-10', {
-        bottom: '15%',
-        left: '5%',
-        transform: 'scaleX(-1) rotate(3deg)'
+    // 5. BIRDS (Clustered)
+    const birdGroup = createDecoration('bird', 'text-zinc-600 w-16 opacity-40', {
+        top: '2800px',
+        left: '60%',
+        transform: 'rotate(-10deg)'
+    });
+    layer.appendChild(birdGroup);
+
+    // 6. BOTTOM MOUNTAIN
+    const bottomMountain = createDecoration('mountain', 'text-zinc-500 w-72 md:w-[32rem] opacity-20', {
+        bottom: '100px',
+        left: '10%',
+        transform: 'scaleX(-1) rotate(5deg)'
     });
     layer.appendChild(bottomMountain);
 
-    // Initial position update with a small delay for layout settling
+    // Initial position update
     setTimeout(updateDecorationPositions, 500);
-    
-    // Update on resize
     window.addEventListener('resize', updateDecorationPositions);
     
     // Add draw-on animation style
@@ -87,25 +109,40 @@ function initDecorations() {
 }
 
 function updateDecorationPositions() {
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+
+    // A. POSITION CIRCLE ON ENIADB
     const eniadLogo = document.getElementById('eniad-logo-container');
     const eniadCircle = document.getElementById('decoration-eniad-circle');
     
     if (eniadLogo && eniadCircle) {
         const rect = eniadLogo.getBoundingClientRect();
-        const scrollY = window.scrollY;
-        const scrollX = window.scrollX;
-        
-        // Position circle exactly above the logo (centered horizontally)
-        // eniadLogo is w-12 (48px), eniadCircle is w-24 (96px)
         const centerX = rect.left + scrollX + (rect.width / 2);
         const centerY = rect.top + scrollY + (rect.height / 2);
-        
-        eniadCircle.style.top = `${centerY - 72}px`; // Shifted up
-        eniadCircle.style.left = `${centerX - 48}px`; // Centered
+        eniadCircle.style.top = `${centerY - 72}px`;
+        eniadCircle.style.left = `${centerX - 48}px`;
+    }
+
+    // B. POSITION PINS ON SECTION HEADERS
+    const eduHeader = document.querySelector('#education h3');
+    const eduPin = document.getElementById('decoration-edu-pin');
+    if (eduHeader && eduPin) {
+        const hRect = eduHeader.getBoundingClientRect();
+        eduPin.style.top = `${hRect.top + scrollY - 60}px`;
+        eduPin.style.left = `${hRect.left + scrollX - 40}px`;
+    }
+
+    const projHeader = document.querySelector('#projects h3');
+    const projPin = document.getElementById('decoration-proj-pin');
+    if (projHeader && projPin) {
+        const pRect = projHeader.getBoundingClientRect();
+        projPin.style.top = `${pRect.top + scrollY - 60}px`;
+        projPin.style.left = `${pRect.right + scrollX + 20}px`;
     }
 }
 
-// Start once DOM is loaded
+// Initialize
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initDecorations);
 } else {
