@@ -28,7 +28,7 @@ const translations = {
 
         "projects.title": "Projects",
         "projects.view_all": "View all",
-        "projects.tikko_desc": "Innovative AI solution project built for campus scale problems. Specific architecture and impact details coming soon.",
+        "projects.tikko_desc": "Tikkocampus is a professional-grade Retrieval-Augmented Generation (RAG) pipeline designed for content researchers and fans. It allows you to ingest TikTok profiles and turn them into a searchable, interactive database.",
         "projects.stutter_desc": "Specialized solution exploring ML models and speech intelligence. Upcoming documentation and specific technical details.",
         "projects.show_more": "Show more",
 
@@ -94,7 +94,7 @@ const translations = {
 
         "projects.title": "Projets",
         "projects.view_all": "Voir tout",
-        "projects.tikko_desc": "Projet de solution IA innovante conçu pour les problèmes à l'échelle du campus. Architecture spécifique et détails d'impact à venir.",
+        "projects.tikko_desc": "Tikkocampus est un pipeline de génération augmentée par récupération (RAG) de niveau professionnel conçu pour les chercheurs de contenu et les fans. Il vous permet d'ingérer des profils TikTok et de les transformer en une base de données consultable et interactive.",
         "projects.stutter_desc": "Solution spécialisée explorant les modèles ML et l'intelligence vocale. Documentation à venir et détails techniques spécifiques.",
         "projects.show_more": "Voir plus",
 
