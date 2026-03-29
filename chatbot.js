@@ -98,7 +98,7 @@ async function handleSendMessage(userText) {
             
             const chunkText = decoder.decode(value, { stream: true });
             reply += chunkText;
-            contentNode.textContent = reply;
+            contentNode.innerHTML = formatMarkdown(reply);
             scrollToBottom();
         }
         
@@ -113,6 +113,26 @@ async function handleSendMessage(userText) {
         chatInput.disabled = false;
         chatInput.focus();
     }
+}
+
+function formatMarkdown(text) {
+    if (!text) return "";
+    
+    // 1. Basic HTML Escaping to prevent XSS
+    let html = text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    // 2. Bold: **text** or __text__
+    html = html.replace(/(\*\*|__)(.*?)\1/g, '<strong>$2</strong>');
+    
+    // 3. Italic: *text* or _text_
+    html = html.replace(/(\*|_)(.*?)\1/g, '<em>$2</em>');
+
+    return html;
 }
 
 function appendMessage(role, text) {
@@ -134,7 +154,7 @@ function createBubble(role, text) {
     
     const textSpan = document.createElement("div");
     textSpan.className = "content whitespace-pre-wrap";
-    textSpan.textContent = text;
+    textSpan.innerHTML = formatMarkdown(text);
     
     bubble.appendChild(textSpan);
     wrapper.appendChild(bubble);
