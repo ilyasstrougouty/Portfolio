@@ -246,41 +246,52 @@ document.addEventListener('DOMContentLoaded', () => {
             const leftSafeX = (containerRect.left - mainRect.left) / 2;
             const rightSafeX = containerRect.right - mainRect.left + (mainRect.right - containerRect.right) / 2;
 
-            // Anchor y to middle of section for intermediate sections
-            let y = section.offsetTop + (section.offsetHeight / (isMobile ? 1.05 : 2));
-            let x = 0;
-
             if (index === 0) {
-                // Hero section: Start at level of "Get in Touch" button on mobile
+                // HERO SECTION: Specialized entrance
                 const heroBtn = section.querySelector('a[href^="mailto"]');
+                let startY, startX;
+                
                 if (isMobile && heroBtn) {
                     const btnRect = heroBtn.getBoundingClientRect();
-                    y = btnRect.top + (btnRect.height / 2) - mainRect.top;
-                    x = window.innerWidth * 0.95;
+                    startY = btnRect.top + (btnRect.height / 2) - mainRect.top;
+                    startX = window.innerWidth * 0.95;
                 } else {
-                    // Start in the right gutter for hero
-                    x = isMobile ? window.innerWidth * 0.95 : rightSafeX;
-                    y = section.offsetTop + (section.offsetHeight * (isMobile ? 0.2 : 0.35));
+                    startX = isMobile ? window.innerWidth * 0.95 : rightSafeX;
+                    startY = section.offsetTop + (section.offsetHeight * (isMobile ? 0.2 : 0.35));
                 }
-                isLeft = true; 
+                
+                points.push({ x: startX, y: startY });
+                
+                // Exit point for Hero (to set the side for next section)
+                points.push({ 
+                    x: isMobile ? window.innerWidth * 0.95 : rightSafeX, 
+                    y: section.offsetTop + section.offsetHeight - (isMobile ? 10 : 40) 
+                });
+                
+                isLeft = true; // Switch to left for next section (Education)
             } else if (index === sections.length - 1) {
-                // Last section (Contact): Point directly to the "Let's Talk" button
+                // LAST SECTION (Contact): Point directly to the core CTA
                 const btn = section.querySelector('a[href^="mailto"]');
                 if (btn) {
                     const btnRect = btn.getBoundingClientRect();
-                    x = btnRect.left + (btnRect.width / 2) - mainRect.left;
-                    y = btnRect.top + (btnRect.height / 2) - mainRect.top;
-                    y -= 10;
+                    const x = btnRect.left + (btnRect.width / 2) - mainRect.left;
+                    const y = btnRect.top + (btnRect.height / 2) - mainRect.top - 10;
+                    points.push({ x, y });
                 } else {
-                    x = window.innerWidth / 2;
+                    points.push({ x: window.innerWidth / 2, y: section.offsetTop + 50 });
                 }
             } else {
-                // Alternating side weave, but strictly within the safe gutters
-                x = isLeft ? (isMobile ? window.innerWidth * 0.05 : leftSafeX) : (isMobile ? window.innerWidth * 0.95 : rightSafeX);
+                // INTERMEDIATE SECTIONS: Double points (Entry and Exit) to stay in the gutter
+                const currentSideX = isLeft ? (isMobile ? window.innerWidth * 0.05 : leftSafeX) : (isMobile ? window.innerWidth * 0.95 : rightSafeX);
+                
+                // Entry Point (Top of section)
+                points.push({ x: currentSideX, y: section.offsetTop + (section.offsetHeight * 0.1) });
+                
+                // Exit Point (Bottom of section)
+                points.push({ x: currentSideX, y: section.offsetTop + (section.offsetHeight * 0.9) });
+                
                 isLeft = !isLeft;
             }
-
-            points.push({ x, y });
         });
 
         // Create SVG Path string with Cubic Beziers for organic curves
