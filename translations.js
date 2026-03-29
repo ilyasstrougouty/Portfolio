@@ -31,7 +31,7 @@ const translations = {
         "projects.title": "Projects",
         "projects.view_all": "View all",
         "projects.tikko_desc": "Tikkocampus is a professional-grade Retrieval-Augmented Generation (RAG) pipeline designed for content researchers and fans. It allows you to ingest TikTok profiles and turn them into a searchable, interactive database.",
-        "projects.stutter_desc": "Specialized solution exploring ML models and speech intelligence. Upcoming documentation and specific technical details.",
+        "projects.stutter_desc": "Empowering individuals to find their voice through interactive play and speech exercises. Transform your communication journey with science-backed gaming mechanics.",
         "projects.show_more": "Show more",
 
         "github.title": "Public Contributions",
@@ -99,7 +99,7 @@ const translations = {
         "projects.title": "Projets",
         "projects.view_all": "Voir tout",
         "projects.tikko_desc": "Tikkocampus est un pipeline de génération augmentée par récupération (RAG) de niveau professionnel conçu pour les chercheurs de contenu et les fans. Il vous permet d'ingérer des profils TikTok et de les transformer en une base de données consultable et interactive.",
-        "projects.stutter_desc": "Solution spécialisée explorant les modèles ML et l'intelligence vocale. Documentation à venir et détails techniques spécifiques.",
+        "projects.stutter_desc": "Donner aux individus les moyens de trouver leur voix grâce à des jeux interactifs et des exercices de parole. Transformez votre parcours de communication avec des mécaniques de jeu basées sur la science.",
         "projects.show_more": "Voir plus",
 
         "github.title": "Contributions Publiques",
