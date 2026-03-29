@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/github-stats/:username",
+      "destination": "/api/github-stats?username=:username"
+    }
+  ]
+}
