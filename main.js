@@ -188,11 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         weeks.forEach((week) => {
             const weekCol = document.createElement('div');
-            weekCol.className = 'flex flex-col gap-[3px] flex-shrink-0';
+            weekCol.className = 'flex flex-col gap-[2px] md:gap-[3px] flex-shrink-0';
             
             week.contributionDays.forEach((day) => {
                 const daySquare = document.createElement('div');
-                daySquare.className = 'w-[10px] h-[10px] rounded-[2px] transition-all duration-300 hover:scale-125 hover:z-10 cursor-pointer flex-shrink-0';
+                // Use smaller squares on mobile, standard 10px on md screens, to fit 53 weeks without scroll
+                daySquare.className = 'w-[4px] h-[4px] sm:w-[5px] sm:h-[5px] md:w-[10px] md:h-[10px] rounded-[1px] md:rounded-[2px] transition-all duration-300 hover:scale-125 hover:z-10 cursor-pointer flex-shrink-0';
                 
                 // If count is 0, use our custom dark color, otherwise use GitHub's returned color
                 daySquare.style.backgroundColor = day.contributionCount > 0 ? day.color : EMPTY_COLOR;

@@ -297,23 +297,23 @@
 
                     <!-- Exact GitHub Dark Grid (Responsive & Centered) -->
                     <div class="flex flex-col items-center w-full">
-                        <div class="w-full max-w-4xl bg-[#0d1117]/50 border border-white/5 rounded-2xl p-6 md:p-10 pb-10 md:pb-12 overflow-x-auto no-scrollbar">
-                            <div class="flex gap-4 min-w-fit">
-                                <!-- Day Labels -->
-                                <div class="flex flex-col justify-between py-8 pt-12 pr-2 font-mono text-[9px] text-zinc-600 uppercase tracking-tighter">
+                        <div class="w-full max-w-4xl bg-[#0d1117]/50 border border-white/5 rounded-2xl p-4 md:p-10 pb-8 md:pb-12 overflow-hidden">
+                            <div class="flex gap-2 md:gap-4 w-full justify-center md:justify-start">
+                                <!-- Day Labels (Hidden on mobile for space) -->
+                                <div class="hidden sm:flex flex-col justify-between py-8 pt-12 pr-2 font-mono text-[9px] text-zinc-600 uppercase tracking-tighter">
                                     <span>Mon</span>
                                     <span>Wed</span>
                                     <span>Fri</span>
                                 </div>
                                 
-                                <div class="flex-1">
+                                <div class="flex-none md:flex-1">
                                     <!-- Month Labels (Dynamic) -->
-                                    <div id="month-labels" class="flex justify-between mb-4 px-2 font-mono text-[9px] text-zinc-600 uppercase tracking-[0.2em]">
+                                    <div id="month-labels" class="hidden md:flex justify-between mb-4 px-2 font-mono text-[9px] text-zinc-600 uppercase tracking-[0.2em]">
                                         <!-- Will be populated by JS -->
                                     </div>
                                     
                                     <!-- The Grid -->
-                                    <div id="contribution-grid" class="flex gap-[3px] overflow-hidden">
+                                    <div id="contribution-grid" class="flex gap-[2px] md:gap-[3px] overflow-hidden justify-center items-center">
                                         <!-- Will be populated by JS -->
                                     </div>
                                     
