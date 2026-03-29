@@ -1,15 +1,26 @@
 /**
  * decorations.js
- * Adds hand-drawn "sketchy" decorative elements to the portfolio.
+ * Transforms the portfolio into a hand-drawn map with mountains, clouds, and rivers.
  */
 
 const DECORATIONS = {
-    mountain: `<svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 50 L40 20 L70 45 L110 10 L150 40 L180 30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="sketch-path" />
-        <path d="M35 25 L45 35 M105 15 L115 25" stroke="currentColor" stroke-width="1" stroke-opacity="0.5" stroke-linecap="round" />
+    mountain: `<svg viewBox="0 0 200 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sketchy Mountain Peaks -->
+        <path d="M10 70 L50 30 L80 60 L120 15 L160 55 L190 40" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="sketch-path" />
+        <path d="M15 72 Q 45 35, 55 40 M75 62 Q 115 20, 125 25 M155 58 Q 185 45, 195 50" stroke="currentColor" stroke-width="1" stroke-opacity="0.6" stroke-linecap="round" />
+        <path d="M45 40 L55 50 M115 25 L125 35 M155 50 L165 55" stroke="currentColor" stroke-width="0.8" stroke-opacity="0.4" stroke-linecap="round" />
+    </svg>`,
+    cloud: `<svg viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 30 C 10 30, 10 20, 25 20 C 30 10, 50 10, 60 20 C 75 20, 75 30, 65 35" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" class="sketch-path" />
+        <path d="M25 25 Q 45 15, 65 25" stroke="currentColor" stroke-width="0.8" stroke-opacity="0.4" stroke-linecap="round" />
+    </svg>`,
+    river: `<svg viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 50 Q 50 20, 100 50 T 200 50 T 300 50" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="sketch-path" />
+        <path d="M10 55 Q 60 25, 110 55 T 210 55" stroke="currentColor" stroke-width="0.8" stroke-opacity="0.3" stroke-linecap="round" />
     </svg>`,
     circle: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M50 10 C 20 10, 10 40, 10 50 C 10 70, 40 90, 50 90 C 70 90, 90 70, 90 50 C 90 30, 70 10, 50 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sketch-path" />
+        <path d="M48 15 C 25 15, 15 45, 15 52" stroke="currentColor" stroke-width="1" stroke-opacity="0.5" stroke-linecap="round" />
     </svg>`,
     bird: `<svg viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M5 10 Q 15 5, 20 10 Q 25 5, 35 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="sketch-path" />
@@ -32,59 +43,36 @@ function initDecorations() {
     const layer = document.getElementById('decorations-layer');
     if (!layer) return;
 
-    // 1. TOP PURPLE PIN (Beginning of trajectory)
-    const topPin = createDecoration('pin', 'text-purple-500 w-8', {
-        top: '50px',
-        left: '50%',
-        transform: 'translateX(-50%)'
-    });
-    layer.appendChild(topPin);
+    // --- LANDMARKS ---
+    
+    // 1. HERO Landmark
+    layer.appendChild(createDecoration('pin', 'text-purple-500 w-8', { top: '60px', left: '50%', transform: 'translateX(-50%)' }));
+    layer.appendChild(createDecoration('mountain', 'text-zinc-400 w-96 opacity-40', { top: '450px', right: '5%', transform: 'rotate(-2deg)' }));
+    layer.appendChild(createDecoration('cloud', 'text-zinc-400 w-32 opacity-20', { top: '150px', left: '10%', transform: 'rotate(5deg)' }));
 
-    // 2. HERO MOUNTAIN (Below the name)
-    const heroMountain = createDecoration('mountain', 'text-zinc-400 w-64 md:w-96 opacity-30', {
-        top: '400px',
-        right: '5%',
-        transform: 'rotate(-2deg)'
-    });
-    layer.appendChild(heroMountain);
-
-    // 3. MIDDLE PINS (Anchored to section transitions)
-    const eduPin = createDecoration('pin', 'text-purple-500 w-8', {
-        top: '1200px', // Aproximately education section start
-        left: '10%'
-    });
+    // 2. EDUCATION Landmark
+    const eduPin = createDecoration('pin', 'text-purple-500 w-8', { top: '1500px', left: '10%' });
     eduPin.id = 'decoration-edu-pin';
     layer.appendChild(eduPin);
-
-    const projPin = createDecoration('pin', 'text-purple-400 w-8', {
-        top: '2200px', // Approximately projects section start
-        right: '10%'
-    });
-    projPin.id = 'decoration-proj-pin';
-    layer.appendChild(projPin);
-
-    // 4. THE SKETCHY CIRCLE ABOVE ENIADB
-    const eniadCircle = createDecoration('circle', 'text-purple-500/50 w-24 h-24', {
-        zIndex: '5'
-    });
+    
+    layer.appendChild(createDecoration('river', 'text-purple-500/20 w-[40rem] opacity-30', { top: '1600px', left: '-5%', transform: 'rotate(-5deg)' }));
+    
+    // The ENIADB Circle
+    const eniadCircle = createDecoration('circle', 'text-purple-500/50 w-24 h-24', {});
     eniadCircle.id = 'decoration-eniad-circle';
     layer.appendChild(eniadCircle);
 
-    // 5. BIRDS (Clustered)
-    const birdGroup = createDecoration('bird', 'text-zinc-600 w-16 opacity-40', {
-        top: '2800px',
-        left: '60%',
-        transform: 'rotate(-10deg)'
-    });
-    layer.appendChild(birdGroup);
+    // 3. PROJECTS Landmark
+    const projPin = createDecoration('pin', 'text-purple-400 w-8', { top: '3000px', right: '10%' });
+    projPin.id = 'decoration-proj-pin';
+    layer.appendChild(projPin);
+    
+    layer.appendChild(createDecoration('cloud', 'text-zinc-600 w-48 opacity-30', { top: '3200px', right: '5%', transform: 'rotate(-5deg)' }));
+    layer.appendChild(createDecoration('bird', 'text-zinc-600 w-16 opacity-40', { top: '3500px', left: '15%', transform: 'rotate(10deg)' }));
 
-    // 6. BOTTOM MOUNTAIN
-    const bottomMountain = createDecoration('mountain', 'text-zinc-500 w-72 md:w-[32rem] opacity-20', {
-        bottom: '100px',
-        left: '10%',
-        transform: 'scaleX(-1) rotate(5deg)'
-    });
-    layer.appendChild(bottomMountain);
+    // 4. FOOTER Landmark
+    layer.appendChild(createDecoration('mountain', 'text-zinc-500 w-[40rem] opacity-30', { bottom: '150px', left: '5%', transform: 'scaleX(-1) rotate(4deg)' }));
+    layer.appendChild(createDecoration('cloud', 'text-zinc-700 w-48 opacity-20', { bottom: '400px', right: '10%' }));
 
     // Initial position update
     setTimeout(updateDecorationPositions, 500);
@@ -96,7 +84,7 @@ function initDecorations() {
         .sketch-path {
             stroke-dasharray: 1000;
             stroke-dashoffset: 1000;
-            animation: draw 2s ease-out forwards;
+            animation: draw 2.5s ease-out forwards;
         }
         @keyframes draw {
             to { stroke-dashoffset: 0; }
@@ -112,33 +100,30 @@ function updateDecorationPositions() {
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
 
-    // A. POSITION CIRCLE ON ENIADB
+    // Circle on ENIADB
     const eniadLogo = document.getElementById('eniad-logo-container');
     const eniadCircle = document.getElementById('decoration-eniad-circle');
-    
     if (eniadLogo && eniadCircle) {
         const rect = eniadLogo.getBoundingClientRect();
-        const centerX = rect.left + scrollX + (rect.width / 2);
-        const centerY = rect.top + scrollY + (rect.height / 2);
-        eniadCircle.style.top = `${centerY - 72}px`;
-        eniadCircle.style.left = `${centerX - 48}px`;
+        eniadCircle.style.top = `${rect.top + scrollY + (rect.height / 2) - 72}px`;
+        eniadCircle.style.left = `${rect.left + scrollX + (rect.width / 2) - 48}px`;
     }
 
-    // B. POSITION PINS ON SECTION HEADERS
+    // Pins on Headers
     const eduHeader = document.querySelector('#education h3');
     const eduPin = document.getElementById('decoration-edu-pin');
     if (eduHeader && eduPin) {
         const hRect = eduHeader.getBoundingClientRect();
-        eduPin.style.top = `${hRect.top + scrollY - 60}px`;
-        eduPin.style.left = `${hRect.left + scrollX - 40}px`;
+        eduPin.style.top = `${hRect.top + scrollY - 65}px`;
+        eduPin.style.left = `${hRect.left + scrollX - 45}px`;
     }
 
     const projHeader = document.querySelector('#projects h3');
     const projPin = document.getElementById('decoration-proj-pin');
     if (projHeader && projPin) {
         const pRect = projHeader.getBoundingClientRect();
-        projPin.style.top = `${pRect.top + scrollY - 60}px`;
-        projPin.style.left = `${pRect.right + scrollX + 20}px`;
+        projPin.style.top = `${pRect.top + scrollY - 65}px`;
+        projPin.style.left = `${pRect.right + scrollX + 15}px`;
     }
 }
 
