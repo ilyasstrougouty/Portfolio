@@ -311,7 +311,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const documentHeight = document.documentElement.scrollHeight;
         const maxScroll = Math.max(1, documentHeight - windowHeight);
         const scrollFraction = Math.max(0, Math.min(1, scrollY / maxScroll));
-        const startPercent = (windowHeight * 0.5) / documentHeight;
+        
+        // Dynamically adjust start percent so line isn't way ahead on mobile
+        let startPercent = (windowHeight * 0.3) / documentHeight;
+        if (window.innerWidth < 1024) {
+            startPercent = 0.01; // barely drawn on initial load on mobile
+        }
+
         const visiblePercent = startPercent + scrollFraction * (1 - startPercent);
         const targetOffset = length - (length * visiblePercent);
 
@@ -322,17 +328,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 maskPath.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1)';
                 maskPath.style.strokeDashoffset = targetOffset.toString();
 
-                // After animation finishes, remove transition so scroll is snappy
+                // After animation finishes, keep a subtle smooth transition for scrolling
                 setTimeout(() => {
-                    maskPath.style.transition = 'none';
+                    maskPath.style.transition = 'stroke-dashoffset 0.4s ease-out';
                     isPathAnimating = false; // Release the lock
                     hasAnimatedMapEntrance = true;
                 }, 1500);
             });
         } else {
-            // ALREADY ANIMATED ENTRANCE: Just instantly snap to the correct scroll position
-            // This prevents "shaking" or "restarting" the animation during mobile scroll/resize
-            maskPath.style.transition = 'none';
+            // ALREADY ANIMATED ENTRANCE: use the fluid scroll transition
+            maskPath.style.transition = 'stroke-dashoffset 0.4s ease-out';
             maskPath.style.strokeDashoffset = targetOffset.toString();
         }
     };
@@ -353,12 +358,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const maxScroll = Math.max(1, documentHeight - windowHeight);
         const scrollFraction = Math.max(0, Math.min(1, scrollY / maxScroll));
 
-        // When at the very top, draw down to 50% of the viewport.
-        // As we scroll to the bottom, smoothly interpolate from that to 100% of the path length.
-        const startPercent = (windowHeight * 0.5) / documentHeight;
-        const visiblePercent = startPercent + scrollFraction * (1 - startPercent);
+        // Dynamically adjust start percent so line isn't way ahead on mobile
+        let startPercent = (windowHeight * 0.3) / documentHeight;
+        if (window.innerWidth < 1024) {
+            startPercent = 0.01; // stay close behind user scroll
+        }
 
+        const visiblePercent = startPercent + scrollFraction * (1 - startPercent);
         const drawLength = length * visiblePercent;
+        
+        // ensure transition is active for buttery smooth tracking
+        maskPath.style.transition = 'stroke-dashoffset 0.4s ease-out';
         maskPath.style.strokeDashoffset = (length - drawLength).toString();
     };
 
