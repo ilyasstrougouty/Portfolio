@@ -11,6 +11,8 @@
     <script src="translations.js"></script>
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-primary selection:text-on-primary overflow-x-hidden">
+    <!-- Decorative Overlays Layer -->
+    <div id="decorations-layer" class="absolute inset-0 pointer-events-none z-0 overflow-hidden w-full h-full"></div>
 
     <!-- Splash Screen (Intro Animation) -->
     <div id="splash-screen" class="fixed inset-0 z-[100] bg-black flex items-center justify-center overflow-hidden">
@@ -88,7 +90,7 @@
                     <div class="absolute left-[23px] md:left-[47px] top-0 bottom-0 w-px bg-outline-variant/30"></div>
                     <!-- Item 1: Engineer's degree (ENIADB) - Most Recent -->
                     <div class="relative mb-24 last:mb-0 reveal">
-                        <div class="absolute -left-[54px] md:-left-[78px] top-0 w-12 h-12 bg-white rounded-full flex items-center justify-center z-10 overflow-hidden border border-zinc-100 shadow-sm">
+                        <div id="eniad-logo-container" class="absolute -left-[54px] md:-left-[78px] top-0 w-12 h-12 bg-white rounded-full flex items-center justify-center z-10 overflow-hidden border border-zinc-100 shadow-sm">
                             <img class="w-full h-full object-cover scale-110" src="assets/eniad-logo.jpg" alt="ENIADB Berkane Logo"/>
                         </div>
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -610,7 +612,9 @@
         </div>
     </div>
 
-    <!-- Inject Chatbot JS Logic -->
+    <!-- Inject Core Logic -->
+    <script src="main.js"></script>
+    <script src="decorations.js"></script>
     <script src="chatbot.js"></script>
 </body>
 </html>
