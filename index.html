@@ -507,6 +507,15 @@
             </div>
         </footer>
 
+        <!-- Dynamic Map SVG (Placed behind content wrappers but above section backgrounds) -->
+        <svg id="scroll-map-svg" class="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+            <defs>
+                <mask id="line-mask">
+                    <path id="mask-path" fill="none" class="stroke-white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" d="" />
+                </mask>
+            </defs>
+            <path id="draw-path" fill="none" class="stroke-[#A27DFF]" stroke-width="2" stroke-dasharray="8 8" stroke-linecap="round" stroke-linejoin="round" mask="url(#line-mask)" d="" />
+        </svg>
 
         <!-- Mobile Navigation Overlay -->
         <div id="mobile-menu-overlay" class="fixed inset-0 z-[100] bg-zinc-950/95 backdrop-blur-2xl flex flex-col items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 pb-20">
