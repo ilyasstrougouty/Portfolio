@@ -7,7 +7,7 @@ const translations = {
         "nav.cv": "CV",
 
         "hero.title": "Hi, I'm Ilyass Trougouty.",
-        "hero.subtitle": "An aspiring AI engineer, currently in 3rd year of ENIAD, I spend my time creating Ai solutions for the daily problems i face.",
+        "hero.subtitle": "An aspiring AI engineer, currently in 3rd year of ENIAD. I spend my time creating AI solutions for the daily problems I face.",
         "hero.cta": "Get in Touch",
 
         "academic.title": "Academic Trajectory",
@@ -21,8 +21,8 @@ const translations = {
         "skills.ml_desc": "Designing and training models, building intelligent RAG pipelines, and integrating neural networks.",
         "skills.data": "Data Analysis",
         "skills.data_desc": "Uncovering insights through robust data manipulation, structures, and visualization techniques.",
-        "skills.web": "Web & Programming",
-        "skills.web_desc": "Building containerized applications, scalable databases, and designing modern interfaces.",
+        "skills.web": "Web, Programming & API",
+        "skills.web_desc": "Building containerized applications, scalable databases, and designing modern interfaces with robust API integration.",
         "skills.version": "Version Control & Infrastructure",
         "skills.version_desc": "Collaborating, managing codebases, and maintaining trackable system histories.",
 
@@ -58,10 +58,10 @@ const translations = {
         "contact.socials": "Socials",
         "contact.role": "AI Engineering Student  •  Open Source Builder  •  Precision Architect",
         "contact.lets_talk": "Let's Talk",
-        "footer.rights": "© 2024 THE ARCHITECTURAL MONOLITH. BUILT WITH PRECISION.",
-        "footer.sitemap": "Sitemap",
-        "footer.source": "Source",
-        "footer.privacy": "Privacy",
+        "footer.rights": "2026 Ilyass Trougouty",
+        "footer.sitemap": "",
+        "footer.source": "",
+        "footer.privacy": "",
         
         "splash.hello": "• Hello"
     },
@@ -73,7 +73,7 @@ const translations = {
         "nav.cv": "CV",
 
         "hero.title": "Bonjour, je suis Ilyass Trougouty.",
-        "hero.subtitle": "Aspirant ingénieur en IA, actuellement en 3ème année à l'ENIAD, je passe mon temps à créer des solutions d'IA pour les problèmes quotidiens que je rencontre.",
+        "hero.subtitle": "Aspirant ingénieur en IA, actuellement en 3ème année à l'ENIAD. Je passe mon temps à créer des solutions d'IA pour les problèmes quotidiens que je rencontre.",
         "hero.cta": "Contactez-moi",
 
         "academic.title": "Parcours Académique",
@@ -87,8 +87,8 @@ const translations = {
         "skills.ml_desc": "Conception et entraînement de modèles, création de pipelines RAG intelligents et intégration de réseaux neuronaux.",
         "skills.data": "Analyse de Données",
         "skills.data_desc": "Découverte d'informations grâce à des techniques robustes de manipulation de données, de structures et de visualisation.",
-        "skills.web": "Web & Programmation",
-        "skills.web_desc": "Création d'applications conteneurisées, bases de données évolutives et conception d'interfaces modernes.",
+        "skills.web": "Web, Programmation & API",
+        "skills.web_desc": "Création d'applications conteneurisées, bases de données évolutives et conception d'interfaces modernes avec intégration API robuste.",
         "skills.version": "Contrôle de Version & Infrastructure",
         "skills.version_desc": "Collaboration, gestion de bases de code et maintenance d'historiques systèmes traçables.",
 
@@ -124,10 +124,10 @@ const translations = {
         "contact.socials": "Réseaux Sociaux",
         "contact.role": "Étudiant Ingénieur en IA  •  Bâtisseur Open Source  •  Architecte de Précision",
         "contact.lets_talk": "Discutons",
-        "footer.rights": "© 2024 LE MONOLITHE ARCHITECTURAL. CONSTRUIT AVEC PRÉCISION.",
-        "footer.sitemap": "Plan du site",
-        "footer.source": "Source",
-        "footer.privacy": "Confidentialité",
+        "footer.rights": "2026 Ilyass Trougouty",
+        "footer.sitemap": "",
+        "footer.source": "",
+        "footer.privacy": "",
 
         "splash.hello": "• Bonjour"
     }
