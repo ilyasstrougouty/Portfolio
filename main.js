@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Flag to prevent scroll events from interrupting the entrance animation of the SVG line
     let isPathAnimating = true;
+    let hasAnimatedMapEntrance = false;
 
     // 1. Language Sequence Handler
     const greetings = [
@@ -120,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalCommitsEl = document.getElementById('total-contributions');
         
         try {
-            const response = await fetch(`http://localhost:3001/api/github-stats/${username}`);
+            const response = await fetch(`/api/github-stats/${username}`);
             const data = await response.json();
             
             if (data.error) throw new Error(data.error);
@@ -231,36 +232,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const points = [];
         let isLeft = true;
+        const isMobile = window.innerWidth < 1024;
+        const mainRect = document.querySelector('main').getBoundingClientRect();
 
         sections.forEach((section, index) => {
-            let y = section.offsetTop + (section.offsetHeight / 2);
+            // Anchor y to bottom of section for intermediate sections on mobile to avoid content
+            let y = section.offsetTop + (section.offsetHeight / (isMobile ? 1.02 : 2));
             let x = 0;
 
             if (index === 0) {
-                // Hero section: Start to the right of the name to avoid collision
-                x = window.innerWidth * 0.45;
-                y = section.offsetTop + (section.offsetHeight * 0.3);
-                isLeft = false;
+                // Hero section: Start at level of "Get in Touch" button on mobile
+                const heroBtn = section.querySelector('a[href^="mailto"]');
+                if (isMobile && heroBtn) {
+                    const btnRect = heroBtn.getBoundingClientRect();
+                    // Vertical level of the button
+                    y = btnRect.top + (btnRect.height / 2) - mainRect.top;
+                    // Keep start point towards the right margin for a cleaner entrance
+                    x = window.innerWidth * 0.95;
+                } else {
+                    x = isMobile ? window.innerWidth * 0.95 : window.innerWidth * 0.45;
+                    y = section.offsetTop + (section.offsetHeight * (isMobile ? 0.2 : 0.3));
+                }
+                isLeft = true; 
             } else if (index === sections.length - 1) {
                 // Last section (Contact): Point directly to the "Let's Talk" button
                 const btn = section.querySelector('a[href^="mailto"]');
                 if (btn) {
-                    // btn is inside relative DOM, to get absolute offset relative to <main>
-                    // we can use getBoundingClientRect + scrollY
-                    const mainRect = document.querySelector('main').getBoundingClientRect();
                     const btnRect = btn.getBoundingClientRect();
                     
                     x = btnRect.left + (btnRect.width / 2) - mainRect.left;
                     y = btnRect.top + (btnRect.height / 2) - mainRect.top;
                     
-                    // We slightly offset Y up to avoid pointing deep inside the button visually
                     y -= 10;
                 } else {
                     x = window.innerWidth / 2;
                 }
             } else {
-                // Alternating
-                x = isLeft ? window.innerWidth * 0.2 : window.innerWidth * 0.8;
+                // Alternating: narrower margins on desktop (20/80), extreme margins on mobile (5/95)
+                x = isLeft ? window.innerWidth * (isMobile ? 0.05 : 0.2) : window.innerWidth * (isMobile ? 0.95 : 0.8);
                 isLeft = !isLeft;
             }
 
@@ -284,27 +293,31 @@ document.addEventListener('DOMContentLoaded', () => {
         maskPath.setAttribute('d', d);
         drawPath.setAttribute('d', d);
 
-        // Start fully hidden (ensure no transition is active while we set this)
-        maskPath.style.transition = 'none';
+        // Initialize array for correct calculations
         const length = maskPath.getTotalLength();
         maskPath.style.strokeDasharray = length;
-        maskPath.style.strokeDashoffset = length;
 
-        // Force a browser reflow so the hidden state is immediately applied
-        maskPath.getBoundingClientRect();
+        if (!hasAnimatedMapEntrance) {
+            // Start fully hidden (ensure no transition is active while we set this)
+            maskPath.style.transition = 'none';
+            maskPath.style.strokeDashoffset = length;
+            // Force a browser reflow so the hidden state is immediately applied
+            maskPath.getBoundingClientRect();
+        }
 
-        // Entrance animation: smoothly draw from 0 after a short delay
-        requestAnimationFrame(() => {
-                // Compute the target position based on current scroll
-                const scrollY = window.scrollY;
-                const windowHeight = window.innerHeight;
-                const documentHeight = document.documentElement.scrollHeight;
-                const maxScroll = Math.max(1, documentHeight - windowHeight);
-                const scrollFraction = Math.max(0, Math.min(1, scrollY / maxScroll));
-                const startPercent = (windowHeight * 0.5) / documentHeight;
-                const visiblePercent = startPercent + scrollFraction * (1 - startPercent);
-                const targetOffset = length - (length * visiblePercent);
+        // Compute the target position based on current scroll
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const maxScroll = Math.max(1, documentHeight - windowHeight);
+        const scrollFraction = Math.max(0, Math.min(1, scrollY / maxScroll));
+        const startPercent = (windowHeight * 0.5) / documentHeight;
+        const visiblePercent = startPercent + scrollFraction * (1 - startPercent);
+        const targetOffset = length - (length * visiblePercent);
 
+        if (!hasAnimatedMapEntrance) {
+            // Entrance animation: smoothly draw from 0 after a short delay
+            requestAnimationFrame(() => {
                 // Apply CSS transition for the entrance animation
                 maskPath.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1)';
                 maskPath.style.strokeDashoffset = targetOffset.toString();
@@ -313,8 +326,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     maskPath.style.transition = 'none';
                     isPathAnimating = false; // Release the lock
+                    hasAnimatedMapEntrance = true;
                 }, 1500);
             });
+        } else {
+            // ALREADY ANIMATED ENTRANCE: Just instantly snap to the correct scroll position
+            // This prevents "shaking" or "restarting" the animation during mobile scroll/resize
+            maskPath.style.transition = 'none';
+            maskPath.style.strokeDashoffset = targetOffset.toString();
+        }
     };
 
     const animatePathOnScroll = () => {
@@ -443,6 +463,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
+
+    // 7. Mobile Menu Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (mobileMenuBtn && closeMenuBtn && mobileMenuOverlay) {
+        const toggleMenu = (show) => {
+            if (show) {
+                mobileMenuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                mobileMenuOverlay.classList.add('opacity-100', 'pointer-events-auto');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                mobileMenuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+                mobileMenuOverlay.classList.add('opacity-0', 'pointer-events-none');
+                document.body.classList.remove('overflow-hidden');
+            }
+        };
+
+        mobileMenuBtn.addEventListener('click', () => toggleMenu(true));
+        closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+        
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Let smooth scroll happen, then close menu
+                setTimeout(() => toggleMenu(false), 150);
+            });
+        });
+    }
 
     // Initialize observers
     setupNavObserver();
