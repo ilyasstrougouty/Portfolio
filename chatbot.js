@@ -51,7 +51,7 @@ async function toggleChat() {
         
         // Show initial welcome if history is empty
         if (messageHistory.length === 0) {
-            appendMessage("ai", "Hello! I'm Ben's AI assistant. I can answer questions about his tech stack, backend development with Python, React Native, and AI architecture. What would you like to know?");
+            appendMessage("ai", "Hello! I'm Ilyass's AI assistant. I can answer questions about his trajectory in AI engineering, Machine Learning expertise, RAG pipelines, and his projects like Tikkocampus. What would you like to know?");
         }
     } else {
         chatWindow.classList.add("opacity-0", "translate-y-4", "pointer-events-none");
