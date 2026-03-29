@@ -237,8 +237,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const mainRect = document.querySelector('main').getBoundingClientRect();
 
         sections.forEach((section, index) => {
-            // Anchor y to bottom of section for intermediate sections on mobile to avoid content
-            let y = section.offsetTop + (section.offsetHeight / (isMobile ? 1.02 : 2));
+            // Find the internal content container to calculate safe gutter zones
+            const container = section.querySelector('[class*="max-w-"]') || section;
+            const containerRect = container.getBoundingClientRect();
+            const mainRect = document.querySelector('main').getBoundingClientRect();
+            
+            // Safe centers for gutters (relative to main)
+            const leftSafeX = (containerRect.left - mainRect.left) / 2;
+            const rightSafeX = containerRect.right - mainRect.left + (mainRect.right - containerRect.right) / 2;
+
+            // Anchor y to middle of section for intermediate sections
+            let y = section.offsetTop + (section.offsetHeight / (isMobile ? 1.05 : 2));
             let x = 0;
 
             if (index === 0) {
@@ -246,13 +255,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const heroBtn = section.querySelector('a[href^="mailto"]');
                 if (isMobile && heroBtn) {
                     const btnRect = heroBtn.getBoundingClientRect();
-                    // Vertical level of the button
                     y = btnRect.top + (btnRect.height / 2) - mainRect.top;
-                    // Keep start point towards the right margin for a cleaner entrance
                     x = window.innerWidth * 0.95;
                 } else {
-                    x = isMobile ? window.innerWidth * 0.95 : window.innerWidth * 0.45;
-                    y = section.offsetTop + (section.offsetHeight * (isMobile ? 0.2 : 0.3));
+                    // Start in the right gutter for hero
+                    x = isMobile ? window.innerWidth * 0.95 : rightSafeX;
+                    y = section.offsetTop + (section.offsetHeight * (isMobile ? 0.2 : 0.35));
                 }
                 isLeft = true; 
             } else if (index === sections.length - 1) {
@@ -260,17 +268,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const btn = section.querySelector('a[href^="mailto"]');
                 if (btn) {
                     const btnRect = btn.getBoundingClientRect();
-                    
                     x = btnRect.left + (btnRect.width / 2) - mainRect.left;
                     y = btnRect.top + (btnRect.height / 2) - mainRect.top;
-                    
                     y -= 10;
                 } else {
                     x = window.innerWidth / 2;
                 }
             } else {
-                // Alternating: narrower margins on desktop (20/80), extreme margins on mobile (5/95)
-                x = isLeft ? window.innerWidth * (isMobile ? 0.05 : 0.2) : window.innerWidth * (isMobile ? 0.95 : 0.8);
+                // Alternating side weave, but strictly within the safe gutters
+                x = isLeft ? (isMobile ? window.innerWidth * 0.05 : leftSafeX) : (isMobile ? window.innerWidth * 0.95 : rightSafeX);
                 isLeft = !isLeft;
             }
 
