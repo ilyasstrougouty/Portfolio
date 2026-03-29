@@ -6,7 +6,7 @@ const translations = {
         "nav.contact": "Contact",
         "nav.cv": "CV",
 
-        "hero.title": "Hi, I'm Ilyass Trougouty.",
+        "hero.title": "Hi, I'm <span class='font-bold text-white'>Ilyass Trougouty</span>.",
         "hero.subtitle": "An aspiring AI engineer, currently in 3rd year of ENIAD. I spend my time creating AI solutions for the daily problems I face.",
         "hero.cta": "Get in Touch",
 
@@ -74,7 +74,7 @@ const translations = {
         "nav.contact": "Contact",
         "nav.cv": "CV",
 
-        "hero.title": "Bonjour, je suis Ilyass Trougouty.",
+        "hero.title": "Bonjour, je suis <span class='font-bold text-white'>Ilyass Trougouty</span>.",
         "hero.subtitle": "Aspirant ingénieur en IA, actuellement en 3ème année à l'ENIAD. Je passe mon temps à créer des solutions d'IA pour les problèmes quotidiens que je rencontre.",
         "hero.cta": "Contactez-moi",
 
