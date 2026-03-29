@@ -58,7 +58,7 @@ const translations = {
         "certs.efset_org": "@ EF Education First",
 
         "contact.socials": "Socials",
-        "contact.role": "AI Engineering Student  •  Open Source Builder  •  Precision Architect",
+        "contact.role": "AI Engineering Student  •  Open Source Builder  •  AI Engineer",
         "contact.lets_talk": "Let's Talk",
         "footer.rights": "2026 Ilyass Trougouty",
         "footer.sitemap": "",
@@ -126,7 +126,7 @@ const translations = {
         "certs.efset_org": "@ EF Education First",
 
         "contact.socials": "Réseaux Sociaux",
-        "contact.role": "Étudiant Ingénieur en IA  •  Bâtisseur Open Source  •  Architecte de Précision",
+        "contact.role": "Étudiant Ingénieur en IA  •  Bâtisseur Open Source  •  Ingénieur en IA",
         "contact.lets_talk": "Discutons",
         "footer.rights": "2026 Ilyass Trougouty",
         "footer.sitemap": "",
